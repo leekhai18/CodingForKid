@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
-public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+{
     public static GameObject itemBeginDragged;
     Vector3 startPosition;
     Transform startParent;
@@ -26,18 +28,21 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         itemBeginDragged = null;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-        if (transform.parent == startParent) {
-            transform.position = startPosition;
+        if (transform.parent == startParent)
+        {
+            transform.DOMove(startPosition, 0.2f);
         }
     }
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

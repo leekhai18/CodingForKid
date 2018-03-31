@@ -70,17 +70,14 @@ public class CarBehaviour : MonoBehaviour
             }
             else
             {
-                switch (slots[0].item.name)
-                {
-                
-                }
+                ExecuteCommand();
             }
         }
     }
 
     void ExecuteCommand()
     {
-        slots[0].item.GetComponent<StartCommand>().Controller(this);
+        slots[0].item.GetComponent<Command>().Controller(this);
         slots[0].GetComponent<Slot>().gameObject.SetActive(false);
         slots.RemoveAt(0);
     }

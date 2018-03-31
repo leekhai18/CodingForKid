@@ -6,14 +6,14 @@ using DG.Tweening;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public static GameObject itemBeginDragged;
+    public static Command itemBeginDragged;
     Vector3 startPosition;
     Transform startParent;
 
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        itemBeginDragged = gameObject;
+        itemBeginDragged = gameObject.GetComponent<Command>();
         startPosition = transform.position;
         startParent = transform.parent;
         GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -26,11 +26,13 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        itemBeginDragged = null;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         if (transform.parent == startParent)
-        {
-            transform.DOMove(startPosition, 0.2f);
+        {          
+            if (itemBeginDragged.GetCurrentState() == EState.begin)
+                transform.DOMove(startPosition, 0.2f);
+            else
+                Debug.Log("BUMMMMMMMMMMMMMMMMMM");
         }
     }
 

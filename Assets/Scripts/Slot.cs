@@ -9,14 +9,13 @@ public class Slot : MonoBehaviour, IDropHandler
     [SerializeField] public string poolName;
 
     Slot begin;
-    Slot end;
-    public GameObject item
+    public Command item
     {
         get
         {
             if (transform.childCount > 0)
             {
-                return transform.GetChild(0).gameObject;
+                return transform.GetChild(0).gameObject.GetComponent<Command>();
             }
 
             return null;
@@ -28,13 +27,17 @@ public class Slot : MonoBehaviour, IDropHandler
         if (!item)
         {
             begin = DragHandler.itemBeginDragged.transform.parent.gameObject.GetComponent<Slot>();
-            EasyObjectPool.instance.GetObjectFromPool(begin.poolName, begin.transform.position, Quaternion.identity)
-                .transform.SetParent(begin.transform);
+
+            if (DragHandler.itemBeginDragged.GetCurrentState() != EState.end)
+            {
+                EasyObjectPool.instance.GetObjectFromPool(begin.poolName, begin.transform.position, Quaternion.identity)
+                    .transform.SetParent(begin.transform);
+            }
 
             DragHandler.itemBeginDragged.transform.SetParent(transform);
+            DragHandler.itemBeginDragged.SetState(EState.end);
 
-            //end = DragHandler.itemBeginDragged.transform.parent.gameObject.GetComponent<Slot>();
-            //end.poolName = begin.poolName;
+            poolName = begin.poolName;
         }
     }
 

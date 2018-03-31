@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnRightCommand : MonoBehaviour, IController<CarBehaviour> {
+public class TurnRightCommand : Command
+{
     // Use this for initialization
     void Start () {
 		
@@ -13,7 +14,7 @@ public class TurnRightCommand : MonoBehaviour, IController<CarBehaviour> {
 		
 	}
 
-    public void Controller(CarBehaviour car)
+    public override void Controller(CarBehaviour car)
     {
         car.TurnRight();
     }

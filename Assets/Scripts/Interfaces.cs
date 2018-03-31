@@ -6,3 +6,9 @@ public interface IController<T>
 {
     void Controller(T car);
 }
+
+public enum EState
+{
+    begin,
+    end
+}

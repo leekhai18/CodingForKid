@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartCommand : MonoBehaviour, IController<CarBehaviour>
+public class StartCommand : Command
 {
     // Use this for initialization
     void Start()
@@ -16,7 +16,7 @@ public class StartCommand : MonoBehaviour, IController<CarBehaviour>
 
     }
 
-    public void Controller(CarBehaviour car)
+    public override void Controller(CarBehaviour car)
     {
         car.StartRun();
     }

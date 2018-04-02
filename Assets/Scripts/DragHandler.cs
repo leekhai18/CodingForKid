@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using MarchingBytes;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -28,11 +29,18 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         if (transform.parent == startParent)
-        {          
+        {
             if (itemBeginDragged.GetCurrentState() == EState.begin)
+            {
                 transform.DOMove(startPosition, 0.2f);
-            else
-                Debug.Log("BUMMMMMMMMMMMMMMMMMM");
+            }
+            else 
+            {
+                Debug.Log("Return pool " + itemBeginDragged.GetComponentInParent<Slot>().poolName);
+                itemBeginDragged.SetState(EState.begin);
+                itemBeginDragged.transform.SetParent(EasyObjectPool.instance.transform);
+                EasyObjectPool.instance.ReturnObjectToPool(itemBeginDragged.gameObject);
+            }
         }
     }
 

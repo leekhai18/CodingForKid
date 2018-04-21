@@ -30,7 +30,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
             if (DragHandler.itemBeginDragged.GetCurrentState() != EState.end)
             {
-                EasyObjectPool.instance.GetObjectFromPool(begin.poolName, begin.transform.position, Quaternion.identity)
+                EasyObjectPool.Instance.GetObjectFromPool(begin.poolName, begin.transform.position, Quaternion.identity)
                     .transform.SetParent(begin.transform);
             }
 

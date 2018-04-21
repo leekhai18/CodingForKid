@@ -9,7 +9,7 @@ public class Example : MonoBehaviour {
 	List<GameObject> goList = new List<GameObject>();
 	
 	public void CreateFromPoolAction() {
-		GameObject go = EasyObjectPool.instance.GetObjectFromPool(poolName,Vector3.zero,Quaternion.identity);
+		GameObject go = EasyObjectPool.Instance.GetObjectFromPool(poolName,Vector3.zero,Quaternion.identity);
 		if(go) {
 			goList.Add(go);
 		}
@@ -17,7 +17,7 @@ public class Example : MonoBehaviour {
 
 	public void ReturnToPoolAction() {
 		foreach(GameObject go in goList) {
-			EasyObjectPool.instance.ReturnObjectToPool(go);
+			EasyObjectPool.Instance.ReturnObjectToPool(go);
 		}
 		goList.Clear();
 	}

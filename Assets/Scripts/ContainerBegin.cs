@@ -12,7 +12,7 @@ public class ContainerBegin : MonoBehaviour
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            GameObject obj = EasyObjectPool.instance.GetObjectFromPool(EasyObjectPool.instance.poolInfo[i].poolName, slots[i].transform.position, Quaternion.identity);
+            GameObject obj = EasyObjectPool.Instance.GetObjectFromPool(EasyObjectPool.Instance.poolInfo[i].poolName, slots[i].transform.position, Quaternion.identity);
             obj.transform.SetParent(slots[i].transform);
         }
     }

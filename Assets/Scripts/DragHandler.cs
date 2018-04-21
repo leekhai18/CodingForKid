@@ -38,8 +38,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             {
                 Debug.Log("Return pool " + itemBeginDragged.GetComponentInParent<Slot>().poolName);
                 itemBeginDragged.SetState(EState.begin);
-                itemBeginDragged.transform.SetParent(EasyObjectPool.instance.transform);
-                EasyObjectPool.instance.ReturnObjectToPool(itemBeginDragged.gameObject);
+                itemBeginDragged.transform.SetParent(EasyObjectPool.Instance.transform);
+                EasyObjectPool.Instance.ReturnObjectToPool(itemBeginDragged.gameObject);
             }
         }
     }

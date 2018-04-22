@@ -7,11 +7,9 @@ using UnityEngine.SceneManagement;
 public class QuizManager : Singleton<QuizManager>
 {
     public GameObject quizPannel;
+    public GameObject quizBackground;
 
-    private Quiz currentQuestion;
-
-    [SerializeField]
-    private List<Quiz> listQuizs;
+    private Quiz currentQuiz;
 
     [SerializeField]
     private Text question;
@@ -30,25 +28,32 @@ public class QuizManager : Singleton<QuizManager>
 
     private void Start()
     {
-        SetCurrentQuestion();
     }
 
-    void SetCurrentQuestion()
+    public void InitQuiz(Quiz quiz)
     {
-        currentQuestion = listQuizs[0];
-        signboard.sprite = currentQuestion.signboard.GetComponent<SpriteRenderer>().sprite;
-        question.text = currentQuestion.question;
-        answers[0].text = currentQuestion.answers[0];
-        answers[1].text = currentQuestion.answers[1];
-        answers[2].text = currentQuestion.answers[2];
+        SetCurrentQuiz(quiz);
+        animator.SetTrigger("Refresh");
+        quizPannel.SetActive(true);
+        quizBackground.SetActive(true);
+    }
 
-        if (currentQuestion.correct == 0)
+    public void SetCurrentQuiz(Quiz quiz)
+    {
+        currentQuiz = quiz;
+        signboard.sprite = currentQuiz.signboard.GetComponent<SpriteRenderer>().sprite;
+        question.text = currentQuiz.question;
+        answers[0].text = currentQuiz.answers[0];
+        answers[1].text = currentQuiz.answers[1];
+        answers[2].text = currentQuiz.answers[2];
+
+        if (currentQuiz.correct == 0)
         {
             results[0].text = "CORRECT";
             results[1].text = "FALSE";
             results[2].text = "FALSE";
         }
-        else if (currentQuestion.correct == 1)
+        else if (currentQuiz.correct == 1)
         {
             results[0].text = "FALSE";
             results[1].text = "CORRECT";
@@ -67,8 +72,10 @@ public class QuizManager : Singleton<QuizManager>
     {
         animator.SetTrigger("A");
 
-        if (currentQuestion.correct == 0)
+        if (currentQuiz.correct == 0)
+        {
             Debug.Log("You have only one more turn!");
+        }
         else
             Debug.Log("GAME OVER!");
     }
@@ -76,7 +83,7 @@ public class QuizManager : Singleton<QuizManager>
     public void UserSelectB()
     {
         animator.SetTrigger("B");
-        if (currentQuestion.correct == 1)
+        if (currentQuiz.correct == 1)
             Debug.Log("You have only one more turn!");
         else
             Debug.Log("GAME OVER!");
@@ -85,7 +92,7 @@ public class QuizManager : Singleton<QuizManager>
     {
         animator.SetTrigger("C");
 
-        if (currentQuestion.correct == 2)
+        if (currentQuiz.correct == 2)
             Debug.Log("You have only one more turn!");
         else
             Debug.Log("GAME OVER!");

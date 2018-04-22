@@ -77,7 +77,7 @@ public class CarBehaviour : MonoBehaviour
         if (collision.GetComponent<Quiz>())
         {
             Stop();
-            QuizManager.Instance.quizPannel.SetActive(true);
+            QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());
         }
     }
 

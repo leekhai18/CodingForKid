@@ -116,25 +116,25 @@ public class CarBehaviour : MonoBehaviour
     {
         directionOnHorizontal = 0;
         directionOnVertical = -1;
-        transform.DORotate(new Vector3(0, 0, 180), 0.2f);
+        transform.DORotate(new Vector3(0, 0, 0), 0.2f);
     }
     public void GoUp()
     {
         directionOnHorizontal = 0;
         directionOnVertical = 1;
-        transform.DORotate(new Vector3(0, 0, 360), 0.2f);
+        transform.DORotate(new Vector3(0, 0, 180), 0.2f);
     }
     public void TurnLeft()
     {
         directionOnVertical = 0;
         directionOnHorizontal = -1;
-        transform.DORotate(new Vector3(0, 0, 90), 0.2f);
+        transform.DORotate(new Vector3(0, 0, -90), 0.2f);
     }
     public void TurnRight()
     {
         directionOnVertical = 0;
         directionOnHorizontal = 1;
-        transform.DORotate(new Vector3(0, 0, 270), 0.2f);
+        transform.DORotate(new Vector3(0, 0, 90), 0.2f);
     }
     public void Stop()
     {

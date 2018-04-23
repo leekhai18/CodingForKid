@@ -20,6 +20,9 @@ public class CarBehaviour : MonoBehaviour
 
     [SerializeField] GameObject effectBoom;
 
+    float counterExitColliderRoad = 0;
+    bool isExitColliderRoad = false;
+
     // Use this for initialization
     void Start()
     {
@@ -33,6 +36,20 @@ public class CarBehaviour : MonoBehaviour
         {
             Run();
         }
+
+        if (isExitColliderRoad)
+        {
+            counterExitColliderRoad += Time.deltaTime;
+
+            if (counterExitColliderRoad > 0.05f)
+            {
+                Debug.Log("No longer in contact with Road");
+                Debug.Log("YOU LOSE");
+
+                Accident();
+                isExitColliderRoad = false;
+            }
+        }
     }
 
     private void OnMouseDown()
@@ -43,38 +60,40 @@ public class CarBehaviour : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Road"))
+        {
+            isExitColliderRoad = false;
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Road")
+        if (collision.CompareTag("Road"))
         {
-            Debug.Log("No longer in contact with Road");
-            Debug.Log("YOU LOSE");
-
-            Accident();
+            isExitColliderRoad = true;
+            counterExitColliderRoad = 0;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "VictoryGate")
+        if (collision.CompareTag("Home"))
         {
             isVictory = true;
             Debug.Log("VICTORY!!!!!!!!!!!!!!!!!!!!!!!!!");
         }
 
-        if (collision.tag == "Fork")
+        if (collision.CompareTag("Fork"))
         {
-            if (!slots[0].item)
-            {
-                Stop();
-            }
-            else
+            if (slots[0].item)
             {
                 ExecuteCommand();
             }
         }
 
-        if (collision.GetComponent<Quiz>())
+        if (collision.CompareTag("Quiz"))
         {
             Stop();
             QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());

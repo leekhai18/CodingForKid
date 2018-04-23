@@ -47,7 +47,7 @@ public class CarBehaviour : MonoBehaviour
     {
         if (collision.tag == "Road")
         {
-            Debug.Log("No longer in contact with " + collision.gameObject.tag);
+            Debug.Log("No longer in contact with Road");
             Debug.Log("YOU LOSE");
 
             Accident();

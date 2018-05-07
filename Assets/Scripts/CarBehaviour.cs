@@ -16,8 +16,6 @@ public class CarBehaviour : MonoBehaviour
     bool isReady = false;
     bool isVictory = false;
 
-    [SerializeField] List<Slot> slots;
-
     [SerializeField] GameObject effectBoom;
 
     float counterExitColliderRoad = 0;
@@ -54,9 +52,12 @@ public class CarBehaviour : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (slots[0].item.GetComponent<StartCommand>() != null)
+        if (GameManager.Instance.InitListCommand())
         {
-            ExecuteCommand();
+            if (GameManager.Instance.IsBooted())
+            {
+                GameManager.Instance.ExecuteCommand();
+            }
         }
     }
 
@@ -87,10 +88,7 @@ public class CarBehaviour : MonoBehaviour
 
         if (collision.CompareTag("Fork"))
         {
-            if (slots[0].item)
-            {
-                ExecuteCommand();
-            }
+            GameManager.Instance.ExecuteCommand();
         }
 
         if (collision.CompareTag("Quiz"))
@@ -98,13 +96,6 @@ public class CarBehaviour : MonoBehaviour
             Stop();
             QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());
         }
-    }
-
-    void ExecuteCommand()
-    {
-        slots[0].item.GetComponent<Command>().Controller(this);
-        slots[0].GetComponent<Slot>().gameObject.SetActive(false);
-        slots.RemoveAt(0);
     }
 
     public void StartRun()

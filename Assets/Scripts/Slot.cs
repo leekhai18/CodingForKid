@@ -37,6 +37,11 @@ public class Slot : MonoBehaviour, IDropHandler
             DragHandler.itemBeginDragged.transform.SetParent(transform);
             DragHandler.itemBeginDragged.SetState(EState.end);
 
+            if (DragHandler.itemBeginDragged.transform.parent.position.x > 676)
+            {
+                GameManager.Instance.Backward(90, 0.8f);
+            }
+
             poolName = begin.poolName;
         }
     }

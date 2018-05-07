@@ -88,6 +88,7 @@ public class CarBehaviour : MonoBehaviour
 
         if (collision.CompareTag("Fork"))
         {
+            GameManager.Instance.NextCommand();
             GameManager.Instance.ExecuteCommand();
         }
 

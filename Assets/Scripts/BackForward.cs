@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class ScrollingController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class BackForward : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField]
     GameObject containerEnd;
 
     [SerializeField]
@@ -20,6 +19,7 @@ public class ScrollingController : MonoBehaviour, IPointerDownHandler, IPointerU
     void Start()
     {
         velocity = 1000;
+        containerEnd = GameManager.Instance.containerEnd;
     }
 
     // Update is called once per frame
@@ -32,14 +32,14 @@ public class ScrollingController : MonoBehaviour, IPointerDownHandler, IPointerU
             {
                 if (containerEnd.transform.position.x > -1020)
                 {
-                    containerEnd.transform.DOMoveX(containerEnd.transform.position.x - velocity * Time.deltaTime, 0.2f);
+                    GameManager.Instance.Backward(velocity * Time.deltaTime, 0.2f);
                 }
             }
             else
             {
                 if (containerEnd.transform.position.x < 358)
                 {
-                    containerEnd.transform.DOMoveX(containerEnd.transform.position.x + velocity * Time.deltaTime, 0.2f);
+                    GameManager.Instance.Forward(velocity * Time.deltaTime, 0.2f);
                 }
             }
         }

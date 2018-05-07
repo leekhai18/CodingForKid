@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -12,8 +14,8 @@ public class GameManager : Singleton<GameManager>
     Command currentCommand;
     int index;
 
-    [SerializeField]
-    GameObject containerEnd;
+    public GameObject containerEnd;
+    float beginX;
 
 
     // Use this for initialization
@@ -23,6 +25,7 @@ public class GameManager : Singleton<GameManager>
         listCommands = new List<Command>();
         carBehaviour = car.GetComponent<CarBehaviour>();
         currentCommand = null;
+        beginX = containerEnd.transform.position.x;
     }
 
     // Update is called once per frame
@@ -42,13 +45,19 @@ public class GameManager : Singleton<GameManager>
         if (currentCommand != null)
         {
             currentCommand.Controller(carBehaviour);
-        }
+            EffectChoosing();
 
-        currentCommand = GetNextCommand();
+            if (currentCommand.transform.parent.position.x > 676)
+            {
+                Backward(90, 0.8f);
+            }
+        }
     }
 
     public bool InitListCommand()
     {
+        TurnBackBeginPositionX();
+
         Transform trans;
         foreach (var item in containerEnd.transform)
         {
@@ -63,12 +72,43 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    Command GetNextCommand()
+    public void NextCommand()
     {
+        EffectExecuteDone();
+
         index++;
         if (index < listCommands.Count)
-            return listCommands[index];
+            currentCommand = listCommands[index];
+        else
+            currentCommand = null;
+    }
 
-        return null;
+    void EffectChoosing()
+    {
+        currentCommand.transform.DOScale(new Vector3(1.2f, 1.2f, 1), 0.5f);
+    }
+
+    void EffectExecuteDone()
+    {
+        if (currentCommand != null)
+        {
+            currentCommand.transform.DOScale(new Vector3(1, 1, 1), 0.5f);
+            currentCommand.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
+        }
+    }
+
+    public void Backward(float distance, float duration)
+    {
+        containerEnd.transform.DOMoveX(containerEnd.transform.position.x - distance, duration);
+    }
+
+    public void Forward(float distance, float duration)
+    {
+        containerEnd.transform.DOMoveX(containerEnd.transform.position.x + distance, duration);
+    }
+
+    public void TurnBackBeginPositionX()
+    {
+        containerEnd.transform.DOMoveX(beginX, 0.15f);
     }
 }

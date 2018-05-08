@@ -12,7 +12,6 @@ public class SignalInformationShowController : MonoBehaviour {
     private void OnMouseDown()
     {
         this.GetComponent<SignalInformationShowController>().informationController.GetComponent<ItemController>().updateID(this.GetComponent<IDcontroller>().ID);
-        Debug.Log("Bat  su kien touch set ID = "+this.GetComponent<IDcontroller>().ID);
         informationController.GetComponent<ItemController>().clickButtonNew();
 
     }

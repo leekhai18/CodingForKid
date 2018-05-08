@@ -26,7 +26,6 @@ public class FadeController : MonoBehaviour {
             cg.alpha = currentValue;
             if (percentageComplete >= 1) break;
             yield return new WaitForEndOfFrame();
-            Debug.Log("Done");
         }
     }
 }

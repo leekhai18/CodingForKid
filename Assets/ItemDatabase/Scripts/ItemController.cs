@@ -39,7 +39,6 @@ public class ItemController : MonoBehaviour
 
     private void updateSignal()
     {
-        Debug.Log("Xuat file hinh anh cua item " + _signalID);
         Item item = ItemDataBase.GetItem(_signalID);
         if (item==null)
         {

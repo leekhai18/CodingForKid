@@ -8,7 +8,6 @@ public class QuizManager : Singleton<QuizManager>
 {
     public GameObject quizPannel;
     public GameObject quizBackground;
-
     private Quiz currentQuiz;
 
     [SerializeField]
@@ -40,8 +39,13 @@ public class QuizManager : Singleton<QuizManager>
 
     public void SetCurrentQuiz(Quiz quiz)
     {
+        
         currentQuiz = quiz;
-        signboard.sprite = currentQuiz.signboard.GetComponent<SpriteRenderer>().sprite;
+
+
+        Item item = ItemDataBase.GetItem(currentQuiz.GetComponent<Quiz>().signboard.GetComponent<IDcontroller>().ID);
+        // signboard.sprite = currentQuiz.signboard.GetComponent<SpriteRenderer>().sprite;
+        signboard.sprite = item.iconSprite;
         question.text = currentQuiz.question;
         answers[0].text = currentQuiz.answers[0];
         answers[1].text = currentQuiz.answers[1];
@@ -87,7 +91,7 @@ public class QuizManager : Singleton<QuizManager>
             Debug.Log("You have only one more turn!");
         else
             Debug.Log("GAME OVER!");
-    }
+        }
     public void UserSelectC()
     {
         animator.SetTrigger("C");
@@ -96,5 +100,6 @@ public class QuizManager : Singleton<QuizManager>
             Debug.Log("You have only one more turn!");
         else
             Debug.Log("GAME OVER!");
+        
     }
 }

@@ -7,4 +7,5 @@ public class Quiz : MonoBehaviour
     public string question;
     public List<string> answers;
     public int correct;
+   
 }

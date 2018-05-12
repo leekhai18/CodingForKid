@@ -82,6 +82,7 @@ public class CarBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Home"))
         {
+            GameManager.Instance.NextCommand();
             isVictory = true;
             Debug.Log("VICTORY!!!!!!!!!!!!!!!!!!!!!!!!!");
         }

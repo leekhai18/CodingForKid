@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fadeHints : MonoBehaviour {
+public class FadeHints : MonoBehaviour {
     private float time;
     private bool check = false;
     private void Start()

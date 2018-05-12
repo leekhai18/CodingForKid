@@ -18,6 +18,13 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         startPosition = transform.position;
         startParent = transform.parent;
         GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+        if (itemBeginDragged.GetCurrentState() == EState.end)
+        {
+            Debug.Log("Return pool " + itemBeginDragged.GetComponentInParent<Slot>().poolName);
+            itemBeginDragged.transform.SetParent(GameManager.Instance.containerCmdHandling.transform);
+            startParent = GameManager.Instance.containerCmdHandling.transform;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -36,7 +43,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             }
             else 
             {
-                Debug.Log("Return pool " + itemBeginDragged.GetComponentInParent<Slot>().poolName);
                 itemBeginDragged.SetState(EState.begin);
                 itemBeginDragged.transform.SetParent(EasyObjectPool.Instance.transform);
                 EasyObjectPool.Instance.ReturnObjectToPool(itemBeginDragged.gameObject);

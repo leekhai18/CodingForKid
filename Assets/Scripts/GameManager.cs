@@ -17,6 +17,8 @@ public class GameManager : Singleton<GameManager>
     public GameObject containerEnd;
     float beginX;
 
+    public GameObject containerCmdHandling;
+
 
     // Use this for initialization
     void Start()
@@ -51,6 +53,10 @@ public class GameManager : Singleton<GameManager>
             {
                 Backward(90, 0.8f);
             }
+        }
+        else
+        {
+            carBehaviour.Stop();
         }
     }
 

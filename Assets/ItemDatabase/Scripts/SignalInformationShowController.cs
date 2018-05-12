@@ -9,12 +9,20 @@ public class SignalInformationShowController : MonoBehaviour {
     // Use this for initialization
     void Start () {
 	}
-    private void OnMouseDown()
+    private void OnMouseEnter()
     {
-        this.GetComponent<SignalInformationShowController>().informationController.GetComponent<ItemController>().updateID(this.GetComponent<IDcontroller>().ID);
-        informationController.GetComponent<ItemController>().clickButtonNew();
-
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            this.GetComponent<SignalInformationShowController>().informationController.GetComponent<ItemController>().updateID(this.GetComponent<IDcontroller>().ID);
+            informationController.GetComponent<ItemController>().clickButtonNew();
+        }
     }
+
+    private void OnMouseExit()
+    {
+        informationController.GetComponent<ItemController>().clickButtonExit();
+    }
+
     // Update is called once per frame
     void Update () {
 	    

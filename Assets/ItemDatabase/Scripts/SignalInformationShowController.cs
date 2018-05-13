@@ -4,24 +4,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SignalInformationShowController : MonoBehaviour {
-    public int ID;
-   // Use this for initialization
-    void Start () {}
-    public Vector3 getLocation()
-    {
-        return transform.position;
-    }
-    //sau khi click vao - va panel hien ra van co the click vao cac panel khac trong khi information panel dang hien
-    //fixed kkhong the click trong khi panel information con acctive
+    public GameObject informationController;
+
+    // Use this for initialization
+    void Start () {
+	}
     private void OnMouseDown()
     {
-        Debug.Log("Goi ham onmouse down");
-        InformationShowAndHide.Instance.beginLocation = Input.mousePosition;
-//        InformationShowAndHide.Instance.endLocation = new Vector3(Screen.width/2, Screen.height/2, 0);
-        Debug.Log("Mouse down on");
-        
-        InformationShowAndHide.Instance.ShowInformationPanel(ID);
-     }
+        this.GetComponent<SignalInformationShowController>().informationController.GetComponent<ItemController>().updateID(this.GetComponent<IDcontroller>().ID);
+        informationController.GetComponent<ItemController>().clickButtonNew();
+
+    }
     // Update is called once per frame
     void Update () {
 	    

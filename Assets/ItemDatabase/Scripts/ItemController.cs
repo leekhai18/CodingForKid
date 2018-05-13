@@ -3,76 +3,71 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemController : Singleton<ItemController>
-{ 
-public GameObject gameController;
+public class ItemController : MonoBehaviour
+{
+    public GameObject gameController;
     public GameObject Panel;
+    public int _signalID;
     public GameObject _spriteSignal;
     public Text _text;
     public Button _btnExit;
     private int numberOfID;
-    private Item currentItem;
+    
+  //  public int sightBoardID=1;
+   // public Sprite sp;
     // Use this for initialization
     void Start()
     {
-        //how to fix this shit man- need a different wave
-        //need to hide this panel when we already started for first time fade out-if not- panel willfade in with time lerp=0
-        //
-        Panel.SetActive(true);
+        
         gameController.GetComponent<FadeController>().FadeOut();
-        StartCoroutine(DestroyInformationPanelAfter(0f));
-        Panel.SetActive(false);
-        //
+
+
     }
-    public void SetLocation(Vector3 loc)
+    public void updateID(int temp)
     {
-        Panel.transform.position = loc;
-    }
-    public void UpdateID(int ID)
-    {
-        Debug.Log("class itemcontroller + ham update id = " + ID);
-        Item item = ItemDataBase.GetItem(ID);
-        currentItem = item;
-
-        if (currentItem == null)
-        {
-
-        }
-        else
-        {
-            _text.text = "" + currentItem.itemDesc;
-            _spriteSignal.GetComponent<Image>().sprite = currentItem.iconSprite;
-
-        }
+        _signalID= temp;
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
-    public void ShowInformationPanel(int ID)
-    {
-        //...
+        //test
+      
+
         
-        UpdateID(ID);
-        gameController.GetComponent<FadeController>().FadeIn();
-
     }
 
-    IEnumerator DestroyInformationPanelAfter(float seconds)
+    private void updateSignal()
     {
-        yield return new WaitForSeconds(seconds);
-
+        Item item = ItemDataBase.GetItem(_signalID);
+        if (item==null)
+        {
+           
+        }
+        else
+        {
+            _text.text =""+ item.itemDesc;
+            _spriteSignal.GetComponent<Image>().sprite = item.iconSprite;
+            
+        }
+    }
+    private void destroyPanel()
+    {
 
         Panel.SetActive(false);
     }
-
-    public void HideInformationPanel()
+    public void clickButtonNew()
     {
-        Debug.Log("Hide information sau khoang thoi gian = " + gameController.GetComponent<FadeController>().time);
+
+        Panel.SetActive(true);
+     
+        updateSignal();
+        gameController.GetComponent<FadeController>().FadeIn();
+        
+    }public void clickButtonExit()
+    {
         gameController.GetComponent<FadeController>().FadeOut();
-        StartCoroutine(DestroyInformationPanelAfter(gameController.GetComponent<FadeController>().time));
+        Invoke("destroyPanel",1);
         
     }
-    
 }

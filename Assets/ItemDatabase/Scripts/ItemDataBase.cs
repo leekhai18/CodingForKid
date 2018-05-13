@@ -17,14 +17,6 @@ public class ItemDataBase {
         _isDatabaseLoaded = true;
         LoadDatabaseForce();
     }
-
-    static public int Getlengh()
-    {
-
-        ValidateDatabase();
-        Item[] resource = Resources.LoadAll<Item>(@"itemResources");
-        return resource.Length;
-    }
     static public void LoadDatabaseForce()
     {
         ValidateDatabase();

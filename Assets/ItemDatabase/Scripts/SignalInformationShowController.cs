@@ -6,14 +6,7 @@ using UnityEngine.EventSystems;
 public class SignalInformationShowController : MonoBehaviour {
     public int ID;
    // Use this for initialization
-    void Start () {
-        Debug.Log("Get component set sprite ID =" + ID);
-        Item item = ItemDataBase.GetItem(ID);
-        if (item == null)
-            Debug.Log("Ko lay dc item - item null");
-        GetComponent<SpriteRenderer>().sprite = item.itemSprite;
-    }
-
+    void Start () {}
     public Vector3 getLocation()
     {
         return transform.position;

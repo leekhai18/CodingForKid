@@ -95,8 +95,8 @@ public class CarBehaviour : MonoBehaviour
         if (collision.CompareTag("Quiz"))
         {
             Stop();
-            QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());
-        }
+           QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());
+       }
     }
 
     public void StartRun()

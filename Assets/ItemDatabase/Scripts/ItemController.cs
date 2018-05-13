@@ -9,12 +9,13 @@ public GameObject gameController;
     public GameObject Panel;
     public GameObject _spriteSignal;
     public Text _text;
-    public Button _btnExit;
+     public GameObject _btnExit;
     private int numberOfID;
     private Item currentItem;
     // Use this for initialization
     void Start()
     {
+        
         //how to fix this shit man- need a different wave
         //need to hide this panel when we already started for first time fade out-if not- panel willfade in with time lerp=0
         //
@@ -40,7 +41,7 @@ public GameObject gameController;
         }
         else
         {
-            _text.text = "" + currentItem.itemDesc;
+            _text.text = "" + currentItem.VietnameseDesc;
             _spriteSignal.GetComponent<Image>().sprite = currentItem.iconSprite;
 
         }
@@ -50,12 +51,14 @@ public GameObject gameController;
     void Update()
     {
     }
+ 
     public void ShowInformationPanel(int ID)
     {
         //...
-        
+        _btnExit.SetActive(true);
         UpdateID(ID);
         gameController.GetComponent<FadeController>().FadeIn();
+      
 
     }
 

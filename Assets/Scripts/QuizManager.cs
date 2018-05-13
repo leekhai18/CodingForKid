@@ -34,8 +34,6 @@ public class QuizManager : Singleton<QuizManager>
     public void InitQuiz(Quiz quiz)
     {
         SetCurrentQuiz(quiz);
-        Debug.Log("DA GOI HAM INIT QUIZ id= "+currentID);
-
         animator.SetTrigger("Refresh");
         quizPannel.SetActive(true);
         quizBackground.SetActive(true);
@@ -50,17 +48,17 @@ public class QuizManager : Singleton<QuizManager>
 
         Item item = ItemDataBase.GetItem(currentID);
         signboard.sprite = item.iconSprite;
-        question.text = currentQuiz.question;
+        question.text = currentQuiz.Question;
         //set giá trị random
         int ex1=currentID;
         int ex2=currentID;
         int ex3=currentID;
         do {
-            ex1 = (int)(Random.Range(0, 9f));
+            ex1 = (int)(Random.Range(0, ItemDataBase.Getlengh()/2));
         } while (ex1 == currentID);
         do
         {
-            ex2 = (int)(Random.Range(10f, 20.1f));
+            ex2 = (int)(Random.Range(ItemDataBase.Getlengh() / 2+1, ItemDataBase.Getlengh()));
         } while (ex2 == currentID);
         if (currentQuiz.correct == 0||currentQuiz.correct>3||currentQuiz.correct<0)
         {

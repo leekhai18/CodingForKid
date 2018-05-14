@@ -3,71 +3,89 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemController : MonoBehaviour
+public class ItemController : Singleton<ItemController>
 {
     public GameObject gameController;
     public GameObject Panel;
-    public int _signalID;
     public GameObject _spriteSignal;
     public Text _text;
-    public Button _btnExit;
+    public GameObject _btnExit;
     private int numberOfID;
-    
-  //  public int sightBoardID=1;
-   // public Sprite sp;
+    private Item currentItem;
+
     // Use this for initialization
+    //function
+    /*
+      creat information panel
+      fade out information panel
+      destroy information panel
+      setacive =false
+      */
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword //???
+    private void Awake()
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword //????
+    {
+        Panel.SetActive(true);
+        gameController.GetComponent<FadeController>().FadeOut();
+        StartCoroutine(DestroyInformationPanelAfter(0f));
+        Panel.SetActive(false);
+
+    }
     void Start()
     {
-        
-        gameController.GetComponent<FadeController>().FadeOut();
 
-
+        //how to fix this shit man- need a different wave
+        //need to hide this panel when we already started for first time fade out-if not- panel willfade in with time lerp=0
+        //
     }
-    public void updateID(int temp)
+    //set gameobject location
+    public void SetLocation(Vector3 loc)
     {
-        _signalID= temp;
+        Panel.transform.position = loc;
     }
-
-    // Update is called once per frame
-    void Update()
+    //update id- update information panel with item[ID]
+    public void UpdateID(int ID)
     {
-        //test
-      
+        Debug.Log("class itemcontroller + ham update id = " + ID);
+        Item item = ItemDataBase.GetItem(ID);
+        currentItem = item;
 
-        
-    }
-
-    private void updateSignal()
-    {
-        Item item = ItemDataBase.GetItem(_signalID);
-        if (item==null)
+        if (currentItem == null)
         {
-           
+
         }
         else
         {
-            _text.text =""+ item.itemDesc;
-            _spriteSignal.GetComponent<Image>().sprite = item.iconSprite;
-            
+            _text.text = "" + currentItem.VietnameseDesc;
+            _spriteSignal.GetComponent<Image>().sprite = currentItem.iconSprite;
+
         }
     }
-    private void destroyPanel()
+    // Update is called once per frame
+    void Update()
+    { }
+    //show information panel
+    public void ShowInformationPanel(int ID)
     {
+        _btnExit.SetActive(true);
+        UpdateID(ID);
+        gameController.GetComponent<FadeController>().FadeIn();
+    }
+    //function delay destroy information panel with courotine
+    IEnumerator DestroyInformationPanelAfter(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
 
         Panel.SetActive(false);
     }
-    public void clickButtonNew()
+    //hide information panel
+    public void HideInformationPanel()
     {
-
-        Panel.SetActive(true);
-     
-        updateSignal();
-        gameController.GetComponent<FadeController>().FadeIn();
-        
-    }public void clickButtonExit()
-    {
+        Debug.Log("Hide information sau khoang thoi gian = " + gameController.GetComponent<FadeController>().time);
         gameController.GetComponent<FadeController>().FadeOut();
-        Invoke("destroyPanel",1);
-        
+        StartCoroutine(DestroyInformationPanelAfter(gameController.GetComponent<FadeController>().time));
+
     }
+
 }

@@ -1,0 +1,663 @@
+fileFormatVersion: 2
+guid: 00b78b28590b04f48b791e9874253d14
+timeCreated: 1526291768
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Bien bao cam - co coc_0
+    21300002: Bien bao cam - co coc_1
+    21300004: Bien bao cam - co coc_2
+    21300006: Bien bao cam - co coc_3
+    21300008: Bien bao cam - co coc_4
+    21300010: Bien bao cam - co coc_5
+    21300012: Bien bao cam - co coc_6
+    21300014: Bien bao cam - co coc_7
+    21300016: Bien bao cam - co coc_8
+    21300018: Bien bao cam - co coc_9
+    21300020: Bien bao cam - co coc_10
+    21300022: Bien bao cam - co coc_11
+    21300024: Bien bao cam - co coc_12
+    21300026: Bien bao cam - co coc_13
+    21300028: Bien bao cam - co coc_14
+    21300030: Bien bao cam - co coc_15
+    21300032: Bien bao cam - co coc_16
+    21300034: Bien bao cam - co coc_17
+    21300036: Bien bao cam - co coc_18
+    21300038: Bien bao cam - co coc_19
+    21300040: Bien bao cam - co coc_20
+    21300042: Bien bao cam - co coc_21
+    21300044: Bien bao cam - co coc_22
+    21300046: Bien bao cam - co coc_23
+    21300048: Bien bao cam - co coc_24
+    21300050: Bien bao cam - co coc_25
+    21300052: Bien bao cam - co coc_26
+    21300054: Bien bao cam - co coc_27
+    21300056: Bien bao cam - co coc_28
+    21300058: Bien bao cam - co coc_29
+    21300060: Bien bao cam - co coc_30
+    21300062: Bien bao cam - co coc_31
+    21300064: Bien bao cam - co coc_32
+    21300066: Bien bao cam - co coc_33
+    21300068: Bien bao cam - co coc_34
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3662
+        width: 362
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_1
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 3665
+        width: 369
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_2
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 3657
+        width: 366
+        height: 910
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_3
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 3657
+        width: 366
+        height: 910
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_4
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 3657
+        width: 369
+        height: 910
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_5
+      rect:
+        serializedVersion: 2
+        x: 2258
+        y: 3667
+        width: 369
+        height: 907
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_6
+      rect:
+        serializedVersion: 2
+        x: 2724
+        y: 3655
+        width: 367
+        height: 912
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_7
+      rect:
+        serializedVersion: 2
+        x: 3162
+        y: 3656
+        width: 370
+        height: 911
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_8
+      rect:
+        serializedVersion: 2
+        x: 3638
+        y: 3657
+        width: 369
+        height: 910
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_9
+      rect:
+        serializedVersion: 2
+        x: 4058
+        y: 3655
+        width: 369
+        height: 912
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2650
+        width: 369
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_11
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 2650
+        width: 366
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_12
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 2650
+        width: 374
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_13
+      rect:
+        serializedVersion: 2
+        x: 1313
+        y: 2650
+        width: 365
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_14
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 2650
+        width: 369
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_15
+      rect:
+        serializedVersion: 2
+        x: 2239
+        y: 2650
+        width: 367
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_16
+      rect:
+        serializedVersion: 2
+        x: 2642
+        y: 2650
+        width: 369
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_17
+      rect:
+        serializedVersion: 2
+        x: 3118
+        y: 2645
+        width: 366
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_18
+      rect:
+        serializedVersion: 2
+        x: 3536
+        y: 2645
+        width: 367
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_19
+      rect:
+        serializedVersion: 2
+        x: 3957
+        y: 2642
+        width: 367
+        height: 912
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1521
+        width: 351
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_21
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 1517
+        width: 366
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_22
+      rect:
+        serializedVersion: 2
+        x: 785
+        y: 1517
+        width: 367
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_23
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 1517
+        width: 365
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_24
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 1517
+        width: 367
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_25
+      rect:
+        serializedVersion: 2
+        x: 2099
+        y: 1519
+        width: 370
+        height: 907
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_26
+      rect:
+        serializedVersion: 2
+        x: 2565
+        y: 1517
+        width: 370
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_27
+      rect:
+        serializedVersion: 2
+        x: 2992
+        y: 1516
+        width: 366
+        height: 910
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_28
+      rect:
+        serializedVersion: 2
+        x: 3473
+        y: 1514
+        width: 369
+        height: 908
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_29
+      rect:
+        serializedVersion: 2
+        x: 3936
+        y: 1521
+        width: 366
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_30
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 329
+        width: 368
+        height: 908
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_31
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 329
+        width: 366
+        height: 910
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_32
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 326
+        width: 366
+        height: 909
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_33
+      rect:
+        serializedVersion: 2
+        x: 1425
+        y: 319
+        width: 365
+        height: 911
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Bien bao cam - co coc_34
+      rect:
+        serializedVersion: 2
+        x: 2029
+        y: 319
+        width: 369
+        height: 911
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

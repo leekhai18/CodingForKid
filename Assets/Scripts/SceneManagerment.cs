@@ -12,7 +12,6 @@ public class SceneManagerment : Singleton<SceneManagerment> {
         {
             DontDestroyOnLoad(this.gameObject);
             created = true;
-            Debug.Log("Awake: " + this.gameObject);
         }
     }
 	

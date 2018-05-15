@@ -28,7 +28,6 @@ public class GameManager : Singleton<GameManager>
         int levelSelected = Int32.Parse(SceneManagerment.Instance.GetParam("LevelSelected"));
         Transform transformOfMap = GameObject.FindGameObjectWithTag("Map").transform;
         Instantiate(listLevels[levelSelected], transformOfMap);
-        Debug.Log("CREATED MAP");
     }
 
     // Use this for initialization

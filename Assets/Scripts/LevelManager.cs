@@ -32,6 +32,7 @@ public class LevelManager : MonoBehaviour {
         {
             // Use a coroutine to load the Scene in the background
             StartCoroutine(LoadYourAsyncScene());
+            isSelected = false;
         }
     }
 

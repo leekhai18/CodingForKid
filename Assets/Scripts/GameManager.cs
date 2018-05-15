@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -19,6 +20,16 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject containerCmdHandling;
 
+    [SerializeField]
+    List<GameObject> listLevels;
+
+    private void Awake()
+    {
+        int levelSelected = Int32.Parse(SceneManagerment.Instance.GetParam("LevelSelected"));
+        Transform transformOfMap = GameObject.FindGameObjectWithTag("Map").transform;
+        Instantiate(listLevels[levelSelected], transformOfMap);
+        Debug.Log("CREATED MAP");
+    }
 
     // Use this for initialization
     void Start()

@@ -38,8 +38,10 @@ public class GameManager : Singleton<GameManager>
 
     public bool IsBooted()
     {
-        currentCommand = listCommands[0];
-        return (listCommands[0].GetComponent<StartCommand>() != null);
+        if (listCommands.Count > 0)      
+            return (listCommands[0].GetComponent<StartCommand>() != null);
+
+        return false;
     }
 
     public void ExecuteCommand()

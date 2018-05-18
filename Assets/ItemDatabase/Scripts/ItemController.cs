@@ -1,4 +1,4 @@
-﻿using System.Collections;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class ItemController : Singleton<ItemController>
 {
     public GameObject gameController;
+    public GameObject panelInformation;
+    public GameObject panelWarning;
     public GameObject Panel;
     public GameObject _spriteSignal;
     public Text _text;
-    public GameObject _btnExit;
-    private int numberOfID;
     private Item currentItem;
-
+    public Text WarningText;
+    public GameObject WarningSignal;
+    public GameObject victoryPanel;
+    public GameObject failedPanel;
     // Use this for initialization
     //function
     /*
@@ -21,22 +24,9 @@ public class ItemController : Singleton<ItemController>
       destroy information panel
       setacive =false
       */
-#pragma warning disable CS0114 // Member hides inherited member; missing override keyword //???
-    private void Awake()
-#pragma warning restore CS0114 // Member hides inherited member; missing override keyword //????
-    {
-        Panel.SetActive(true);
-        gameController.GetComponent<FadeController>().FadeOut();
-        StartCoroutine(DestroyInformationPanelAfter(0f));
-        Panel.SetActive(false);
-
-    }
     void Start()
     {
-
-        //how to fix this shit man- need a different wave
-        //need to hide this panel when we already started for first time fade out-if not- panel willfade in with time lerp=0
-        //
+       
     }
     //set gameobject location
     public void SetLocation(Vector3 loc)
@@ -56,18 +46,37 @@ public class ItemController : Singleton<ItemController>
         }
         else
         {
+
             _text.text = "" + currentItem.VietnameseDesc;
             _spriteSignal.GetComponent<Image>().sprite = currentItem.iconSprite;
 
+            WarningText.text = _text.text;
+            WarningSignal.GetComponent<Image>().sprite= currentItem.iconSprite; ;
         }
     }
+
+   /* public void SettingPanel()
+    {
+        if (Panel == panelInformation)
+        {
+            Panel = panelWarning;
+
+        }
+        else
+            Panel = panelInformation;
+    }*/
     // Update is called once per frame
     void Update()
     { }
     //show information panel
+    public void ShowWarningPanel(int ID)
+    {
+        UpdateID(ID);
+        gameController.GetComponent<FadeController>().FadeIn();
+
+    }
     public void ShowInformationPanel(int ID)
     {
-        _btnExit.SetActive(true);
         UpdateID(ID);
         gameController.GetComponent<FadeController>().FadeIn();
     }
@@ -82,9 +91,37 @@ public class ItemController : Singleton<ItemController>
     //hide information panel
     public void HideInformationPanel()
     {
-        Debug.Log("Hide information sau khoang thoi gian = " + gameController.GetComponent<FadeController>().time);
         gameController.GetComponent<FadeController>().FadeOut();
-        StartCoroutine(DestroyInformationPanelAfter(gameController.GetComponent<FadeController>().time));
+        StartCoroutine(DestroyInformationPanelAfter(gameController.GetComponent<FadeController>().Time));
+
+    }
+    public void ShowResultPanel(string str)
+    {
+        bool victory;
+        if (str == "Victory")
+            victory = true;
+        else victory = false;
+        if (victory == true)
+            ShowVictoryPanel();
+        else
+            ShowFailedPanel();
+    }
+    public void ShowVictoryPanel()
+    {
+        Debug.Log("Victory +show panel");
+        failedPanel.SetActive(false);
+        victoryPanel.SetActive(true);
+    }
+    public void ShowFailedPanel()
+    {
+        Debug.Log("Lose + show panel");
+        victoryPanel.SetActive(false);
+        StartCoroutine(WaittingLose(2));
+    }
+    IEnumerator WaittingLose(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        failedPanel.SetActive(true);
 
     }
 

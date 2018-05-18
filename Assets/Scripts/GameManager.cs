@@ -7,6 +7,10 @@ using System;
 
 public class GameManager : Singleton<GameManager>
 {
+    public static int numberOfLevel;
+    public float countTime;
+    public static float timeEnd;
+    public static float timeBegin;
     [SerializeField]
     GameObject car;
     CarBehaviour carBehaviour;
@@ -22,28 +26,44 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     List<GameObject> listLevels;
-
     private void Awake()
     {
         int levelSelected = Int32.Parse(SceneManagerment.Instance.GetParam("LevelSelected"));
         Transform transformOfMap = GameObject.FindGameObjectWithTag("Map").transform;
+        
         Instantiate(listLevels[levelSelected], transformOfMap);
     }
-
+    
     // Use this for initialization
     void Start()
     {
+        countTime = 10;
+        timeEnd = 0;
+        timeBegin = 0;
         index = 0;
         listCommands = new List<Command>();
         carBehaviour = car.GetComponent<CarBehaviour>();
         currentCommand = null;
         beginX = containerEnd.transform.position.x;
+        numberOfLevel = listLevels.ToArray().Length;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (timeBegin != 0 && timeEnd == 0)
+        {
+            if(Time.time-timeBegin<=countTime)
+            carBehaviour.clock.text = (Time.time - timeBegin).ToString()+" s";
+            if (Time.time - timeBegin > countTime)
+                EndGame("Failed");
+        }
+        if (timeEnd - timeBegin >= countTime)
+        {
+            carBehaviour.clock.text = (Time.time - timeBegin).ToString();
 
+            EndGame("Failed");
+        }
     }
 
     public bool IsBooted()
@@ -71,7 +91,8 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            carBehaviour.Stop();
+            // carBehaviour.Stop();
+            carBehaviour.Run();
         }
     }
 
@@ -132,4 +153,47 @@ public class GameManager : Singleton<GameManager>
     {
         containerEnd.transform.DOMoveX(beginX, 0.15f);
     }
+  public void Replay()
+    {
+        Debug.Log("\replay level" + LevelManager.Instance.GetLevel());
+        LevelManager.Instance.UpdateLevel(LevelManager.Instance.GetLevel());
+    }
+    public void NextLevel()
+    {
+        if(LevelManager.Instance.GetLevel() + 1>LevelManager.Instance.CountListOfMap())      
+            LevelManager.Instance.UpdateLevel(0);
+        else
+        LevelManager.Instance.UpdateLevel(LevelManager.Instance.GetLevel()+1);
+    }
+    public void EndGame(string str)
+    {
+        ItemController.Instance.ShowResultPanel(str);
+        if (str == "Victory")
+        {
+            StartCoroutine(WaitingWin(5));
+        }
+        else
+            StartCoroutine(WaitingLose(5));
+    }
+    IEnumerator WaitingWin(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        NextLevel();
+
+    }
+    IEnumerator  WaitingLose(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManagerment.Instance.Load("GameOver");
+    }
+    public void ReturnToLevelSelect()
+    {
+        SceneManagerment.Instance.Load("SelectLevel");
+    }
+    public void ReturnToHome()
+    {
+        SceneManagerment.Instance.Load("GameHome");
+
+    }
+ 
 }

@@ -30,8 +30,11 @@ public class SceneManagerment : Singleton<SceneManagerment> {
 
     public AsyncOperation Load(string sceneName, string paramKey, string paramValue)
     {
-        parameters = new Dictionary<string, string>();
-        parameters.Add(paramKey, paramValue);
+        Debug.Log("On loading scene");
+        parameters = new Dictionary<string, string>
+        {
+            { paramKey, paramValue }
+        };
         return SceneManager.LoadSceneAsync(sceneName);    
     }
 
@@ -52,5 +55,10 @@ public class SceneManagerment : Singleton<SceneManagerment> {
             parameters = new Dictionary<string, string>();
 
         parameters.Add(paramKey, paramValue);
+    }
+    public AsyncOperation Load(string sceneName)
+    {
+      
+        return SceneManager.LoadSceneAsync(sceneName);
     }
 }

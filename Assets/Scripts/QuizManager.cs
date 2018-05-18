@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class QuizManager : Singleton<QuizManager>
 {
+    static int numberOfTime;
     public GameObject itemController;
     public GameObject quizPannel;
     public GameObject quizBackground;
@@ -29,7 +30,7 @@ public class QuizManager : Singleton<QuizManager>
     public bool CheckEnd = true;
     private void Start()
     {
-
+        numberOfTime = 0;
     }
 
     public void InitQuiz(Quiz quiz)
@@ -183,6 +184,7 @@ public class QuizManager : Singleton<QuizManager>
             Debug.Log("GAME OVER!");
         }
 
+        CarProcessing();
     }
 
     public void UserSelectB()
@@ -200,6 +202,7 @@ public class QuizManager : Singleton<QuizManager>
             Debug.Log("GAME OVER!");
         }
 
+        CarProcessing();
     }
     public void UserSelectC()
     {
@@ -217,6 +220,16 @@ public class QuizManager : Singleton<QuizManager>
 
             CheckEnd = true;
             Debug.Log("GAME OVER!");
+        }
+        CarProcessing();
+    }
+    public void CarProcessing()
+    {
+        if (CheckEnd == true)
+            GameManager.Instance.EndGame("Failed");
+        else if (CheckEnd == false)
+        {
+            GameManager.Instance.Replay();
         }
 
     }

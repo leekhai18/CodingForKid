@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using UnityEngine.UI;
 public class CarBehaviour : MonoBehaviour
 {
 
@@ -12,7 +12,8 @@ public class CarBehaviour : MonoBehaviour
     int directionOnHorizontal = 0;
     int directionOnVertical = 0;
 
-
+    public Text clock;
+    
     bool isReady = false;
     bool isVictory = false;
 
@@ -20,11 +21,11 @@ public class CarBehaviour : MonoBehaviour
 
     float counterExitColliderRoad = 0;
     bool isExitColliderRoad = false;
-
     // Use this for initialization
     void Start()
     {
-
+        
+        clock.text = "0 s";
     }
 
     // Update is called once per frame
@@ -57,6 +58,7 @@ public class CarBehaviour : MonoBehaviour
             if (GameManager.Instance.IsBooted())
             {
                 GameManager.Instance.ExecuteCommand();
+                GameManager.timeBegin = Time.time;
             }
         }
     }
@@ -84,7 +86,9 @@ public class CarBehaviour : MonoBehaviour
         {
             GameManager.Instance.NextCommand();
             isVictory = true;
+            GameManager.timeEnd = Time.time;
             Debug.Log("VICTORY!!!!!!!!!!!!!!!!!!!!!!!!!");
+            GameManager.Instance.EndGame("Victory");
         }
 
         if (collision.CompareTag("Fork"))
@@ -135,15 +139,28 @@ public class CarBehaviour : MonoBehaviour
         directionOnVertical = 0;
         isReady = false;
     }
+    public void StopAndWaiting()
+    {
+        directionOnHorizontal = 0;
+        directionOnVertical = 0;
+        isReady = false;
+        Instantiate(effectBoom, transform.position, Quaternion.identity);
+        GameManager.Instance.EndGame("Failed");
 
+
+    }
     void Accident()
     {
+
+        GameManager.timeEnd = Time.time;
+
         Stop();
         this.GetComponent<Renderer>().enabled = false;
         Instantiate(effectBoom, transform.position, Quaternion.identity);
+        GameManager.Instance.EndGame("Failed");
     }
 
-    void Run()
+    public  void Run()
     {
         transform.position = new Vector3(transform.position.x + speedX * directionOnHorizontal * Time.deltaTime, transform.position.y + speedY * directionOnVertical * Time.deltaTime, transform.position.z);
     }

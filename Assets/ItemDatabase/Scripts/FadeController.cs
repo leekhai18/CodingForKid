@@ -8,7 +8,7 @@ public class FadeController : MonoBehaviour
     public CanvasGroup fadeElement;
     private float _time = 1f;
 
-    public float time
+    public float Time
     {
         get
         {
@@ -29,24 +29,24 @@ public class FadeController : MonoBehaviour
     }
     public void FadeIn()
     {
-        StartCoroutine(FadeCanvasGroup(fadeElement, fadeElement.alpha, 1f, time, InformationShowAndHide.Instance.beginLocation, InformationShowAndHide.Instance.endLocation, 0, 1));
+        StartCoroutine(FadeCanvasGroup(fadeElement, fadeElement.alpha, 1f, Time, InformationShowAndHide.Instance.beginLocation, InformationShowAndHide.Instance.endLocation, 0, 1));
     }
     public void FadeOut()
     {
 
-        StartCoroutine(FadeCanvasGroup(fadeElement, fadeElement.alpha, 0f, time, InformationShowAndHide.Instance.endLocation, InformationShowAndHide.Instance.beginLocation, 1, 0));
+        StartCoroutine(FadeCanvasGroup(fadeElement, fadeElement.alpha, 0f, Time, InformationShowAndHide.Instance.endLocation, InformationShowAndHide.Instance.beginLocation, 1, 0));
     }
 
 
     public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime, Vector3 beginLoc, Vector3 endLoc, float scaleBegin, float scaleEnd)
     {
-        float _timeStartedLerping = Time.time;
-        float timeSinceStarted = Time.time - _timeStartedLerping;
+        float _timeStartedLerping = UnityEngine.Time.time;
+        float timeSinceStarted = UnityEngine.Time.time - _timeStartedLerping;
         float percentageComplete = timeSinceStarted / lerpTime;
 
         while (true)
         {
-            timeSinceStarted = Time.time - _timeStartedLerping;
+            timeSinceStarted = UnityEngine.Time.time - _timeStartedLerping;
             percentageComplete = timeSinceStarted / lerpTime;
             float currentValue = Mathf.Lerp(start, end, percentageComplete);
             float currentScale = Mathf.Lerp(scaleBegin, scaleEnd, percentageComplete);

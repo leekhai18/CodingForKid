@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour {
+public class LevelManager :Singleton<LevelManager> {
+    public  int numberOfLevel;
+     public static int SelectedStaticLevel;
     [SerializeField]
     List<Image> listLevels;
 
@@ -19,11 +21,12 @@ public class LevelManager : MonoBehaviour {
 
     bool isSelected;
 
-    int levelSelected;
+    public int levelSelected;
 
     // Use this for initialization
     void Start () {
         isSelected = false;
+        numberOfLevel = GameManager.numberOfLevel;
 	}
 	
 	// Update is called once per frame
@@ -34,15 +37,34 @@ public class LevelManager : MonoBehaviour {
             StartCoroutine(LoadYourAsyncScene());
             isSelected = false;
         }
+
     }
 
     public void SelectedLevel(int i)
     {
-        levelSelected = i - 1;
-        listLevels[levelSelected].sprite = spriteLevelSeleted;
-        isSelected = true;
-    }
 
+      //  if (i <= GameManager.numberOfLevel)
+        {
+            levelSelected = i;
+
+            SelectedStaticLevel = levelSelected;
+            listLevels[levelSelected - 1].sprite = spriteLevelSeleted;
+            isSelected = true;
+        }
+    }
+    public void UpdateLevel(int i)
+    {
+        {
+            levelSelected = i;
+
+            isSelected = true;
+            StartCoroutine(LoadYourAsyncScene());
+            isSelected = false;
+
+            SelectedStaticLevel = levelSelected;
+        }
+    }
+    
     IEnumerator LoadYourAsyncScene()
     {
         // The Application loads the Scene in the background as the current Scene runs.
@@ -57,4 +79,13 @@ public class LevelManager : MonoBehaviour {
             yield return null;
         }
     }
+    public int GetLevel()
+    {
+        return SelectedStaticLevel;
+    }
+    public int CountListOfMap()
+    {
+        return 3;
+    }
+
 }

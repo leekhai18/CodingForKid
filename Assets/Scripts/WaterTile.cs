@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+#if UNITY_EDITOR
 public class WaterTile : Tile
 {
 
@@ -282,15 +282,17 @@ public class WaterTile : Tile
     }
 
 
-    [MenuItem("Assets/Create/Tiles/WaterTile")]
+    [UnityEditor.MenuItem("Assets/Create/Tiles/WaterTile")]
     public static void CreateWaterTile()
     {
-        string path = EditorUtility.SaveFilePanelInProject("Save Watertile", "New Watertile", "asset", "Save watertile", "Assets");
+        string path = UnityEditor.EditorUtility.SaveFilePanelInProject("Save Watertile", "New Watertile", "asset", "Save watertile", "Assets");
         if (path == "")
         {
             return;
         }
-        AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<WaterTile>(), path);
+        UnityEditor.AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<WaterTile>(), path);
     }
 
 }
+
+#endif

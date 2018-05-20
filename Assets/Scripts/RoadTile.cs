@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
+#if UNITY_EDITOR
 
 public class RoadTile : Tile
 {
@@ -258,16 +259,17 @@ public class RoadTile : Tile
     {
         return tilemap.GetTile(position) == this;
     }
-    
-    
-    [MenuItem("Assets/Create/Tiles/RoadTile")]
+
+    [UnityEditor.MenuItem("Assets/Create/Tiles/RoadTile")]
     public static void CreateRoadTile()
     {
-        string path = EditorUtility.SaveFilePanelInProject("Save Roadtile", "New Roadtile", "asset", "Save Roadtile", "Assets");
+        string path = UnityEditor.EditorUtility.SaveFilePanelInProject("Save Roadtile", "New Roadtile", "asset", "Save Roadtile", "Assets");
         if (path == "")
         {
             return;
         }
-        AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<RoadTile>(), path);
+        UnityEditor.AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<RoadTile>(), path);
     }
 }
+
+#endif

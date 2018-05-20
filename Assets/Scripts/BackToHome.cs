@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BackToHome : MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class BackToHome : MonoBehaviour {
 	}
     public void ReTurnToHome()
     {
-        SceneManagerment.Instance.Load("GameHome");
+        SceneManager.LoadScene("GameHome");
         
     }
     public void ReturnToSelectLevel()

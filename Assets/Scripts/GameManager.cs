@@ -8,7 +8,7 @@ using System;
 public class GameManager : Singleton<GameManager>
 {
     public GameObject loadingScene;
-    public int numberOfStar = 3;
+    
     public Slider slide;
     public Text text;
     public GameObject clock;
@@ -62,35 +62,45 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
+
         if (timeBegin != 0 && timeEnd == 0)
         {
 
             clock.GetComponent<Text>().text = (countTime - (Time.time - timeBegin)).ToString("0.0")+" s";
             if (Time.time - timeBegin > countTime)
+            {
+               QuizManager.Instance. quizPannel.SetActive(false);
+               QuizManager.Instance. quizBackground.SetActive(false);
                 EndGame("Failed");
+            }
         }
-        if (timeEnd - timeBegin == countTime)
+        if (timeEnd - timeBegin > countTime)
         {
-            clock.GetComponent<Text>().text = (countTime-( Time.time - timeBegin)).ToString("0.0")+" s";
-
+            clock.GetComponent<Text>().text = (countTime-( timeEnd - timeBegin)).ToString("0.0")+" s";
+           QuizManager.Instance. quizPannel.SetActive(false);
+           QuizManager.Instance. quizBackground.SetActive(false);
             EndGame("Failed");
         }
-        if(numberOfStar==3)
+        if(SceneManagerment.starOfCounting==1)
         {
+            
             LifeCount.Instance.star.GetComponent<Image>().sprite = LifeCount.Instance.threeStar.GetComponent<Image>().sprite;
         }
-        else if(numberOfStar==2)
+        if (SceneManagerment.starOfCounting == 2)
         {
 
+           
             LifeCount.Instance.star.GetComponent<Image>().sprite = LifeCount.Instance.twoStar.GetComponent<Image>().sprite;
         }
-            else if(numberOfStar==1)
+            if (SceneManagerment.starOfCounting == 1)
         {
 
+           
             LifeCount.Instance.star.GetComponent<Image>().sprite = LifeCount.Instance.oneStar.GetComponent<Image>().sprite;
         }
-            else if(numberOfStar==0)
+            if (SceneManagerment.starOfCounting==0)
         {
+            
             EndGame("Failed");
         }
     }
@@ -184,8 +194,28 @@ public class GameManager : Singleton<GameManager>
     }
   public void Replay()
     {
-        Debug.Log("\replay level" + LevelManager.Instance.GetLevel());
-        LevelManager.Instance.UpdateLevel(LevelManager.Instance.GetLevel());
+        StartCoroutine(Loadreplay());
+    }
+    IEnumerator Loadreplay()
+    {
+
+        // The Application loads the Scene in the background as the current Scene runs.
+        // This is particularly good for creating loading screens.
+        // You could also load the Scene by using sceneBuildIndex
+
+        AsyncOperation asyncLoad = SceneManagerment.Instance.Load("Gameplay", "LevelSelected", LevelManager.SelectedStaticLevel.ToString());
+        loadingScene.SetActive(true);
+
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
+            slide.value = progress;
+
+            text.text = "" + progress * 100f + " %";
+            yield return null;
+        }
     }
     public void NextLevel()
     {
@@ -193,15 +223,20 @@ public class GameManager : Singleton<GameManager>
     }
     public void EndGame(string str)
     {
-    //   QuizManager.Instance. quizPannel.SetActive(true);
-    //    QuizManager.Instance.quizBackground.SetActive(true);
+        //   QuizManager.Instance. quizPannel.SetActive(true);
+        //    QuizManager.Instance.quizBackground.SetActive(true);
         ItemController.Instance.ShowResultPanel(str);
         if (str == "Victory")
         {
+
             StartCoroutine(WaitingWin(5));
+            
         }
         else
+        {
             StartCoroutine(WaitingLose(5));
+            
+        }
     }
     IEnumerator WaitingWin(float seconds)
     {
@@ -216,10 +251,13 @@ public class GameManager : Singleton<GameManager>
     }
     public void ReturnToLevelSelect()
     {
+
+        SceneManagerment.starOfCounting = 3;
         SceneManagerment.Instance.Load("SelectLevel");
     }
     public void ReturnToHome()
     {
+        SceneManagerment.starOfCounting = 3;
         SceneManagerment.Instance.Load("GameHome");
 
     }

@@ -98,10 +98,22 @@ public class CarBehaviour : MonoBehaviour
 
         if (collision.CompareTag("Quiz"))
         {
-            GameManager.Instance.numberOfStar--;
-            Stop();
-            QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());
-           
+            GameManager.timeEnd= Time.time;
+            Debug.Log("befor"+SceneManagerment.starOfCounting);
+            if (SceneManagerment.starOfCounting > 1)
+            {
+                SceneManagerment.starOfCounting--;
+
+                Debug.Log("after" + SceneManagerment.starOfCounting);
+                Stop();
+                QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());
+
+            }
+            else
+            {
+                Accident();
+            }
+            
         }
     }
 

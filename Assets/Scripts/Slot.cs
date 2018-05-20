@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using MarchingBytes;
+using System;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
@@ -26,23 +27,29 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         if (!item)
         {
-            begin = DragHandler.itemBeginDragged.transform.parent.gameObject.GetComponent<Slot>();
-
-            if (DragHandler.itemBeginDragged.GetCurrentState() == EState.begin)
+            try
             {
-                EasyObjectPool.Instance.GetObjectFromPool(begin.poolName, begin.transform.position, Quaternion.identity)
-                    .transform.SetParent(begin.transform);
+                begin = DragHandler.itemBeginDragged.transform.parent.gameObject.GetComponent<Slot>();
+
+                if (DragHandler.itemBeginDragged.GetCurrentState() == EState.begin)
+                {
+                    EasyObjectPool.Instance.GetObjectFromPool(begin.poolName, begin.transform.position, Quaternion.identity)
+                        .transform.SetParent(begin.transform);
+                }
+
+                DragHandler.itemBeginDragged.transform.SetParent(transform);
+                DragHandler.itemBeginDragged.SetState(EState.end);
+
+                if (DragHandler.itemBeginDragged.transform.parent.position.x > 676)
+                {
+                    GameManager.Instance.Backward(90, 0.8f);
+                }
+
+                poolName = begin.poolName;
             }
-
-            DragHandler.itemBeginDragged.transform.SetParent(transform);
-            DragHandler.itemBeginDragged.SetState(EState.end);
-
-            if (DragHandler.itemBeginDragged.transform.parent.position.x > 676)
+            catch (Exception)
             {
-                GameManager.Instance.Backward(90, 0.8f);
             }
-
-            poolName = begin.poolName;
         }
     }
 

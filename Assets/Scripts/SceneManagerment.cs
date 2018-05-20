@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerment : Singleton<SceneManagerment> {
     private static bool created = false;
-
+    public static float starOfCounting=3;
     // Use this for initialization
     void Start () {
         if (!created)

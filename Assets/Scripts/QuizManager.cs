@@ -4,9 +4,11 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+
 public class QuizManager : Singleton<QuizManager>
 {
-    static int numberOfTime;
+
     public GameObject itemController;
     public GameObject quizPannel;
     public GameObject quizBackground;
@@ -30,13 +32,13 @@ public class QuizManager : Singleton<QuizManager>
     public bool CheckEnd = true;
     private void Start()
     {
-        numberOfTime = 0;
+       
     }
 
     public void InitQuiz(Quiz quiz)
     {
         SetCurrentQuiz(quiz);
-        animator.SetTrigger("Refresh");
+     //   animator.SetTrigger("Refresh");
         quizPannel.SetActive(true);
         quizBackground.SetActive(true);
     }
@@ -47,125 +49,128 @@ public class QuizManager : Singleton<QuizManager>
         currentQuiz = quiz;
 
         currentID = quiz.GetComponent<Quiz>().signboard.GetComponent<SignalInformationShowController>().ID;
-
-        Item item = ItemDataBase.GetItem(currentID);
-        signboard.sprite = item.iconSprite;
-        question.text = currentQuiz.Question;
-        //set giá trị random
-        int ex1 = currentID;
-        int ex2 = currentID;
-        int ex3 = currentID;
-        do
-        {
-            ex1 = (int)(Random.Range(0, ItemDataBase.Getlengh() / 2));
-        } while (ex1 == currentID);
-        do
-        {
-            ex2 = (int)(Random.Range(ItemDataBase.Getlengh() / 2 + 1, ItemDataBase.Getlengh()));
-        } while (ex2 == currentID);
-        if (currentQuiz.correct == 0 || currentQuiz.correct > 3 || currentQuiz.correct < 0)
-        {
-            ex3 = (int)Random.Range(0f, 3f);
-        }
-        Item item1 = ItemDataBase.GetItem(ex1);
-        Item item2 = ItemDataBase.GetItem(ex2);
-        switch (ex3)
-        {
-            case 0:
-                {
-                    // câu 1 đúng
-                    currentQuiz.correct = 0;
-                    int ex4 = (int)Random.Range(0f, 4f);
-                    if (ex4 > 2)
+       
+            Item item = ItemDataBase.GetItem(currentID);
+      
+            signboard.sprite = item.iconSprite;
+            question.text = currentQuiz.Question;
+            //set giá trị random
+            int ex1 = currentID;
+            int ex2 = currentID;
+            int ex3 = currentID;
+            do
+            {
+                ex1 = (int)(Random.Range(0,(int)( ItemDataBase.Getlengh() / 2)));
+            } while (ex1 == currentID);
+            do
+            {
+                ex2 = (int)(Random.Range(ItemDataBase.Getlengh() / 2 + 1, ItemDataBase.Getlengh()-1));
+            } while (ex2 == currentID);
+            if (currentQuiz.correct == 0 || currentQuiz.correct > 3 || currentQuiz.correct < 0)
+            {
+                ex3 = (int)Random.Range(0f, 3f);
+            }
+            Debug.Log("Item 1 ID = " + ex1);
+             Debug.Log("Item 2 ID = " + ex2);
+             Item item1 = ItemDataBase.GetItem(ex1);
+            Item item2 = ItemDataBase.GetItem(ex2);
+            switch (ex3)
+            {
+                case 0:
                     {
-                        results[0].text = "CORRECT";
-                        results[1].text = "FALSE";
-                        results[2].text = "FALSE";
+                        // câu 1 đúng
+                        currentQuiz.correct = 0;
+                        int ex4 = (int)Random.Range(0f, 4f);
+                        if (ex4 > 2)
+                        {
+                            results[0].text = "CORRECT";
+                            results[1].text = "FALSE";
+                            results[2].text = "FALSE";
 
-                        //
-                        answers[0].text = item.itemDesc;
-                        answers[1].text = item1.itemDesc;
-                        answers[2].text = item2.itemDesc;
+                            //
+                            answers[0].text = item.itemDesc;
+                            answers[1].text = item1.itemDesc;
+                            answers[2].text = item2.itemDesc;
+                        }
+                        else
+                        {
+                            results[0].text = "CORRECT";
+                            results[1].text = "FALSE";
+                            results[2].text = "FALSE";
+
+                            //
+                            answers[0].text = item.itemDesc;
+                            answers[1].text = item2.itemDesc;
+                            answers[2].text = item1.itemDesc;
+
+                        }
+                        break;
                     }
-                    else
+                case 1:
                     {
-                        results[0].text = "CORRECT";
-                        results[1].text = "FALSE";
-                        results[2].text = "FALSE";
+                        // câu 2 đúng
 
-                        //
-                        answers[0].text = item.itemDesc;
-                        answers[1].text = item2.itemDesc;
-                        answers[2].text = item1.itemDesc;
+                        currentQuiz.correct = 1;
+                        int ex4 = (int)Random.Range(0f, 4f);
+                        if (ex4 > 2)
+                        {
+                            results[0].text = "FALSE";
+                            results[1].text = "CORRECT";
+                            results[2].text = "FALSE";
 
+                            //
+                            answers[0].text = item1.itemDesc;
+                            answers[1].text = item.itemDesc;
+                            answers[2].text = item2.itemDesc;
+                        }
+                        else
+                        {
+                            results[0].text = "FALSE";
+                            results[1].text = "CORRECT";
+                            results[2].text = "FALSE";
+
+                            //
+                            answers[0].text = item2.itemDesc;
+                            answers[1].text = item.itemDesc;
+                            answers[2].text = item1.itemDesc;
+
+                        }
+                        break;
                     }
-                    break;
-                }
-            case 1:
-                {
-                    // câu 2 đúng
-
-                    currentQuiz.correct = 1;
-                    int ex4 = (int)Random.Range(0f, 4f);
-                    if (ex4 > 2)
+                default:
                     {
-                        results[0].text = "FALSE";
-                        results[1].text = "CORRECT";
-                        results[2].text = "FALSE";
+                        // câu 3 đúng
 
-                        //
-                        answers[0].text = item1.itemDesc;
-                        answers[1].text = item.itemDesc;
-                        answers[2].text = item2.itemDesc;
+                        currentQuiz.correct = 2;
+                        int ex4 = (int)Random.Range(0f, 4f);
+                        if (ex4 > 2)
+                        {
+                            results[0].text = "FALSE";
+                            results[1].text = "FALSE";
+                            results[2].text = "CORRECT";
+
+                            //
+                            answers[0].text = item1.itemDesc;
+                            answers[1].text = item2.itemDesc;
+                            answers[2].text = item.itemDesc;
+                        }
+                        else
+                        {
+                            results[0].text = "FALSE";
+                            results[1].text = "FALSE";
+                            results[2].text = "CORRECT";
+
+                            //
+                            answers[0].text = item2.itemDesc;
+                            answers[1].text = item1.itemDesc;
+                            answers[2].text = item.itemDesc;
+                        }
+                        break;
+
                     }
-                    else
-                    {
-                        results[0].text = "FALSE";
-                        results[1].text = "CORRECT";
-                        results[2].text = "FALSE";
+            }
 
-                        //
-                        answers[0].text = item2.itemDesc;
-                        answers[1].text = item.itemDesc;
-                        answers[2].text = item1.itemDesc;
-
-                    }
-                    break;
-                }
-            default:
-                {
-                    // câu 3 đúng
-
-                    currentQuiz.correct = 2;
-                    int ex4 = (int)Random.Range(0f, 4f);
-                    if (ex4 > 2)
-                    {
-                        results[0].text = "FALSE";
-                        results[1].text = "FALSE";
-                        results[2].text = "CORRECT";
-
-                        //
-                        answers[0].text = item1.itemDesc;
-                        answers[1].text = item2.itemDesc;
-                        answers[2].text = item.itemDesc;
-                    }
-                    else
-                    {
-                        results[0].text = "FALSE";
-                        results[1].text = "FALSE";
-                        results[2].text = "CORRECT";
-
-                        //
-                        answers[0].text = item2.itemDesc;
-                        answers[1].text = item1.itemDesc;
-                        answers[2].text = item.itemDesc;
-                    }
-                    break;
-
-                }
-        }
-
-
+       
 
     }
 
@@ -231,6 +236,6 @@ public class QuizManager : Singleton<QuizManager>
         {
             GameManager.Instance.Replay();
         }
-        Time.timeScale = 1;
+       
     }
 }

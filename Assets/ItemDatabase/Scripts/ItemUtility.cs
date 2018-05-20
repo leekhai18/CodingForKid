@@ -5,11 +5,11 @@ using UnityEditor;
 public class ItemUtility
 
 {
-#if UNITY_EDITOR
+
     [MenuItem("Assets/Create/item")]
     static public void CreateItem()
     {
         ScriptableObjectUtility.CreateAsset<Item>();
     }
-#endif
+
 }

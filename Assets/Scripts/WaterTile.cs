@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class WaterTile : Tile
 {
+#if UNITY_EDITOR
     /// <summary>
     /// An array with all the waterTiles that we have in our game
     /// </summary>
@@ -293,5 +294,6 @@ public class WaterTile : Tile
         AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<WaterTile>(), path);
     }
 
+#endif
 #endif
 }

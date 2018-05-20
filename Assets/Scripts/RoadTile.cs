@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+#if UNITY_EDITOR
 public class RoadTile : Tile
 {
     /// <summary>
@@ -259,8 +259,7 @@ public class RoadTile : Tile
         return tilemap.GetTile(position) == this;
     }
     
-
-#if UNITY_EDITOR
+    
     [MenuItem("Assets/Create/Tiles/RoadTile")]
     public static void CreateRoadTile()
     {
@@ -271,6 +270,5 @@ public class RoadTile : Tile
         }
         AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<RoadTile>(), path);
     }
-
 #endif
 }

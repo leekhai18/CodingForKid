@@ -10,8 +10,12 @@ public class BackToHome : MonoBehaviour {
 	}
     public void ReTurnToHome()
     {
-        Debug.Log("Return to hom from 404 page");
-        GameManager.Instance.ReturnToHome();
+        SceneManagerment.Instance.Load("GameHome");
+        
+    }
+    public void ReturnToSelectLevel()
+    {
+        SceneManagerment.Instance.Load("SelectLevel");
     }
     // Update is called once per frame
     void Update () {

@@ -3,79 +3,101 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class LevelManager :Singleton<LevelManager> {
-    public  int numberOfLevel;
+    public static int countOfLevel=0;
      public static int SelectedStaticLevel;
+    public Text text;
     [SerializeField]
-    List<Image> listLevels;
-
-    [SerializeField]
-    Sprite spriteLevelSeleted;
-
-    [SerializeField]
-    Sprite spriteHomeSeleted;
-
-    [SerializeField]
-    Sprite spriteShopSeleted;
+    List<Button> listLevels;
 
     bool isSelected;
 
     public int levelSelected;
-
+    public GameObject loadingScene;
+    public Slider slide;
     // Use this for initialization
     void Start () {
         isSelected = false;
-        numberOfLevel = GameManager.numberOfLevel;
+       
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (isSelected)
-        {
-            // Use a coroutine to load the Scene in the background
-            StartCoroutine(LoadYourAsyncScene());
-            isSelected = false;
-        }
-
+        if (levelSelected != 0)
+            SelectedStaticLevel= levelSelected;
     }
 
     public void SelectedLevel(int i)
     {
-
-      //  if (i <= GameManager.numberOfLevel)
+        try
         {
+          
+            // countOfLevel= GameManager.Instance.CountList();
             levelSelected = i;
-
-            SelectedStaticLevel = levelSelected;
-            listLevels[levelSelected - 1].sprite = spriteLevelSeleted;
-            isSelected = true;
         }
+        catch (Exception)
+        {
+            levelSelected = 0;
+          }
+        StartCoroutine(LoadYourAsyncScene());
+        SelectedStaticLevel = levelSelected;
+
+        isSelected = false;
+        
     }
     public void UpdateLevel(int i)
     {
         {
-            levelSelected = i;
-
             isSelected = true;
+            try
+            {
+                countOfLevel = GameManager.Instance.CountList();
+                levelSelected = i;
+            }
+            catch (Exception)
+            {
+                levelSelected = 0;
+            }
             StartCoroutine(LoadYourAsyncScene());
-            isSelected = false;
-
             SelectedStaticLevel = levelSelected;
+
+            isSelected = false;
         }
     }
-    
+
     IEnumerator LoadYourAsyncScene()
     {
+
         // The Application loads the Scene in the background as the current Scene runs.
         // This is particularly good for creating loading screens.
         // You could also load the Scene by using sceneBuildIndex
 
         AsyncOperation asyncLoad = SceneManagerment.Instance.Load("Gameplay", "LevelSelected", levelSelected.ToString());
+        try
+        {
+            loadingScene.SetActive(true);
+      
 
+        }
+        catch (Exception)
+        {
+
+        }
+       
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
+            try
+            {
+                float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
+                slide.value = progress;
+
+                text.text = "" + progress * 100f + " %";
+            }
+            catch (Exception)
+            { }
             yield return null;
         }
     }
@@ -85,7 +107,8 @@ public class LevelManager :Singleton<LevelManager> {
     }
     public int CountListOfMap()
     {
-        return 3;
+
+        return GameManager.Instance.CountList();
     }
 
 }

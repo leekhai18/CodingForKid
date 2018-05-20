@@ -76,7 +76,7 @@ namespace MarchingBytes
             {
                 //increment size var, this is for info purpose only
                 poolSize++;
-                Debug.Log(string.Format("Growing pool {0}. New size: {1}", poolName, poolSize));
+
                 //create new object
                 po = NewObjectInstance(transformParent);
             }
@@ -111,7 +111,6 @@ namespace MarchingBytes
 				 */
                 if (po.isPooled)
                 {
-                    Debug.LogWarning(po.gameObject.name + " is already in pool. Why are you trying to return it again? Check usage.");
                 }
                 else
                 {
@@ -121,7 +120,6 @@ namespace MarchingBytes
             }
             else
             {
-                Debug.LogError(string.Format("Trying to add object to incorrect pool {0} {1}", po.poolName, poolName));
             }
         }
     }
@@ -153,14 +151,12 @@ namespace MarchingBytes
                 string poolName = poolInfo[index].poolName;
                 if (poolName.Length == 0)
                 {
-                    Debug.LogError(string.Format("Pool {0} does not have a name!", index));
-                }
+                 }
                 for (int internalIndex = index + 1; internalIndex < poolInfo.Length; internalIndex++)
                 {
                     if (poolName.Equals(poolInfo[internalIndex].poolName))
                     {
-                        Debug.LogError(string.Format("Pool {0} & {1} have the same name. Assign different names.", index, internalIndex));
-                    }
+                       }
                 }
             }
         }
@@ -174,7 +170,7 @@ namespace MarchingBytes
                                      currentPoolInfo.poolSize, currentPoolInfo.fixedSize, transform);
 
 
-                Debug.Log("Creating pool: " + currentPoolInfo.poolName);
+
                 //add to mapping dict
                 poolDictionary[currentPoolInfo.poolName] = pool;
             }

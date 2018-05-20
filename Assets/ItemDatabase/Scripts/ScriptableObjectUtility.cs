@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
-
+#if UNITY_EDITOR
 public class ScriptableObjectUtility {
     public static void CreateAsset<T>() where T:ScriptableObject
     {
@@ -24,3 +24,4 @@ public class ScriptableObjectUtility {
         Selection.activeObject = asset;
     }
 }
+#endif

@@ -7,8 +7,13 @@ using System;
 
 public class GameManager : Singleton<GameManager>
 {
-    public static int numberOfLevel;
-    public float countTime;
+    public GameObject loadingScene;
+    public int numberOfStar = 3;
+    public Slider slide;
+    public Text text;
+    public GameObject clock;
+    public GameObject star;
+    public static float countTime;
     public static float timeEnd;
     public static float timeBegin;
     [SerializeField]
@@ -26,18 +31,24 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     List<GameObject> listLevels;
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     private void Awake()
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
     {
         int levelSelected = Int32.Parse(SceneManagerment.Instance.GetParam("LevelSelected"));
+
         Transform transformOfMap = GameObject.FindGameObjectWithTag("Map").transform;
         
         Instantiate(listLevels[levelSelected], transformOfMap);
+        //
+        LevelManager.countOfLevel= listLevels.ToArray().Length; 
     }
     
     // Use this for initialization
     void Start()
     {
         countTime = 10;
+        clock.GetComponent<Text>().text = "" + countTime + " Seconds";
         timeEnd = 0;
         timeBegin = 0;
         index = 0;
@@ -45,7 +56,7 @@ public class GameManager : Singleton<GameManager>
         carBehaviour = car.GetComponent<CarBehaviour>();
         currentCommand = null;
         beginX = containerEnd.transform.position.x;
-        numberOfLevel = listLevels.ToArray().Length;
+        LevelManager.countOfLevel = listLevels.ToArray().Length;
     }
 
     // Update is called once per frame
@@ -53,15 +64,33 @@ public class GameManager : Singleton<GameManager>
     {
         if (timeBegin != 0 && timeEnd == 0)
         {
-            if(Time.time-timeBegin<=countTime)
-            carBehaviour.clock.text = (Time.time - timeBegin).ToString()+" s";
+
+            clock.GetComponent<Text>().text = (countTime - (Time.time - timeBegin)).ToString("0.0")+" s";
             if (Time.time - timeBegin > countTime)
                 EndGame("Failed");
         }
-        if (timeEnd - timeBegin >= countTime)
+        if (timeEnd - timeBegin == countTime)
         {
-            carBehaviour.clock.text = (Time.time - timeBegin).ToString();
+            clock.GetComponent<Text>().text = (countTime-( Time.time - timeBegin)).ToString("0.0")+" s";
 
+            EndGame("Failed");
+        }
+        if(numberOfStar==3)
+        {
+            LifeCount.Instance.star.GetComponent<Image>().sprite = LifeCount.Instance.threeStar.GetComponent<Image>().sprite;
+        }
+        else if(numberOfStar==2)
+        {
+
+            LifeCount.Instance.star.GetComponent<Image>().sprite = LifeCount.Instance.twoStar.GetComponent<Image>().sprite;
+        }
+            else if(numberOfStar==1)
+        {
+
+            LifeCount.Instance.star.GetComponent<Image>().sprite = LifeCount.Instance.oneStar.GetComponent<Image>().sprite;
+        }
+            else if(numberOfStar==0)
+        {
             EndGame("Failed");
         }
     }
@@ -160,13 +189,12 @@ public class GameManager : Singleton<GameManager>
     }
     public void NextLevel()
     {
-        if(LevelManager.Instance.GetLevel() + 1>LevelManager.Instance.CountListOfMap())      
-            LevelManager.Instance.UpdateLevel(0);
-        else
-        LevelManager.Instance.UpdateLevel(LevelManager.Instance.GetLevel()+1);
+        LoadSceneNextLevel();
     }
     public void EndGame(string str)
     {
+    //   QuizManager.Instance. quizPannel.SetActive(true);
+    //    QuizManager.Instance.quizBackground.SetActive(true);
         ItemController.Instance.ShowResultPanel(str);
         if (str == "Victory")
         {
@@ -195,5 +223,38 @@ public class GameManager : Singleton<GameManager>
         SceneManagerment.Instance.Load("GameHome");
 
     }
- 
+    public int CountList()
+    {
+        return listLevels.ToArray().Length;
+    }
+    public void LoadSceneNextLevel()
+    {
+        LevelManager.SelectedStaticLevel++;
+        StartCoroutine(LoadYourAsyncScene());
+    }
+    IEnumerator LoadYourAsyncScene()
+    {
+
+        // The Application loads the Scene in the background as the current Scene runs.
+        // This is particularly good for creating loading screens.
+        // You could also load the Scene by using sceneBuildIndex
+       
+        AsyncOperation asyncLoad = SceneManagerment.Instance.Load("Gameplay", "LevelSelected",LevelManager.SelectedStaticLevel.ToString());
+        Debug.Log("On loading scene");
+        loadingScene.SetActive(true);
+
+
+
+
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+
+
+            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
+            slide.value = progress;
+            text.text = "" + progress * 100f + " %";
+            yield return null;
+        }
+    }
 }

@@ -12,7 +12,6 @@ public class CarBehaviour : MonoBehaviour
     int directionOnHorizontal = 0;
     int directionOnVertical = 0;
 
-    public Text clock;
     
     bool isReady = false;
     bool isVictory = false;
@@ -25,7 +24,7 @@ public class CarBehaviour : MonoBehaviour
     void Start()
     {
         
-        clock.text = "0 s";
+        
     }
 
     // Update is called once per frame
@@ -42,8 +41,8 @@ public class CarBehaviour : MonoBehaviour
 
             if (counterExitColliderRoad > 0.05f)
             {
-                Debug.Log("No longer in contact with Road");
-                Debug.Log("YOU LOSE");
+
+             
 
                 Accident();
                 isExitColliderRoad = false;
@@ -99,8 +98,10 @@ public class CarBehaviour : MonoBehaviour
 
         if (collision.CompareTag("Quiz"))
         {
+            GameManager.Instance.numberOfStar--;
             Stop();
             QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());
+           
         }
     }
 

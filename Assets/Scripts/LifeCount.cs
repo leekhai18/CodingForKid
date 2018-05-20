@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class IDcontroller : MonoBehaviour
+public class LifeCount : Singleton<LifeCount>
 {
-    public int ID;
+    public Image zeroStar;
+    public Image star;
+    public Image oneStar;
+    public Image twoStar;
+    public Image threeStar;
+
     // Use this for initialization
     void Start()
     {
-        //    this.GetComponent<SignalInformationShowController>().informationController.GetComponent<ItemController>().updateID(ID);
+
     }
 
     // Update is called once per frame
@@ -17,4 +23,5 @@ public class IDcontroller : MonoBehaviour
 
 
     }
+  
 }

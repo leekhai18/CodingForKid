@@ -31,10 +31,14 @@ namespace MaterialUI
                 TextureImporter importer = assetImporter as TextureImporter;
                 importer.textureType = TextureImporterType.Default;
                 importer.npotScale = TextureImporterNPOTScale.None;
+#pragma warning disable CS0618 // Type or member is obsolete
                 importer.generateCubemap = TextureImporterGenerateCubemap.None;
+#pragma warning restore CS0618 // Type or member is obsolete
                 importer.spriteImportMode = SpriteImportMode.Single;
                 importer.wrapMode = TextureWrapMode.Clamp;
+#pragma warning disable CS0618 // Type or member is obsolete
                 importer.textureFormat = TextureImporterFormat.AutomaticTruecolor;
+#pragma warning restore CS0618 // Type or member is obsolete
                 importer.filterMode = FilterMode.Trilinear;
                 //			Debug.Log(GlobalVars.shadowSpriteBorder);
                 importer.spriteBorder = MaterialGlobals.shadowSpriteBorder;

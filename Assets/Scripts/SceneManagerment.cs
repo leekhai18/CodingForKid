@@ -60,5 +60,9 @@ public class SceneManagerment : Singleton<SceneManagerment> {
     {
       
         return SceneManager.LoadSceneAsync(sceneName);
+
     }
+
+ 
+
 }

@@ -231,6 +231,6 @@ public class QuizManager : Singleton<QuizManager>
         {
             GameManager.Instance.Replay();
         }
-
+        Time.timeScale = 1;
     }
 }

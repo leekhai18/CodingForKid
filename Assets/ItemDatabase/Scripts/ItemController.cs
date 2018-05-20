@@ -16,6 +16,9 @@ public class ItemController : Singleton<ItemController>
     public GameObject WarningSignal;
     public GameObject victoryPanel;
     public GameObject failedPanel;
+    private bool signalCheck;
+    public GameObject timeResult;
+    public Image starResult;
     // Use this for initialization
     //function
     /*
@@ -26,7 +29,7 @@ public class ItemController : Singleton<ItemController>
       */
     void Start()
     {
-       
+        signalCheck = true;
     }
     //set gameobject location
     public void SetLocation(Vector3 loc)
@@ -36,7 +39,7 @@ public class ItemController : Singleton<ItemController>
     //update id- update information panel with item[ID]
     public void UpdateID(int ID)
     {
-        Debug.Log("class itemcontroller + ham update id = " + ID);
+
         Item item = ItemDataBase.GetItem(ID);
         currentItem = item;
 
@@ -55,16 +58,6 @@ public class ItemController : Singleton<ItemController>
         }
     }
 
-   /* public void SettingPanel()
-    {
-        if (Panel == panelInformation)
-        {
-            Panel = panelWarning;
-
-        }
-        else
-            Panel = panelInformation;
-    }*/
     // Update is called once per frame
     void Update()
     { }
@@ -77,8 +70,12 @@ public class ItemController : Singleton<ItemController>
     }
     public void ShowInformationPanel(int ID)
     {
-        UpdateID(ID);
-        gameController.GetComponent<FadeController>().FadeIn();
+        if (signalCheck == true)
+        {
+            UpdateID(ID);
+            gameController.GetComponent<FadeController>().FadeIn();
+            signalCheck = false;
+        }
     }
     //function delay destroy information panel with courotine
     IEnumerator DestroyInformationPanelAfter(float seconds)
@@ -91,9 +88,9 @@ public class ItemController : Singleton<ItemController>
     //hide information panel
     public void HideInformationPanel()
     {
-        gameController.GetComponent<FadeController>().FadeOut();
+       gameController.GetComponent< FadeController>().FadeOut();
         StartCoroutine(DestroyInformationPanelAfter(gameController.GetComponent<FadeController>().Time));
-
+        signalCheck = true;
     }
     public void ShowResultPanel(string str)
     {
@@ -108,13 +105,17 @@ public class ItemController : Singleton<ItemController>
     }
     public void ShowVictoryPanel()
     {
-        Debug.Log("Victory +show panel");
+        timeResult.GetComponent<Text>().text=""+(GameManager.timeEnd - GameManager.timeBegin) + " s";
+
+        starResult.sprite = LifeCount.Instance.star.sprite;
         failedPanel.SetActive(false);
         victoryPanel.SetActive(true);
     }
     public void ShowFailedPanel()
     {
-        Debug.Log("Lose + show panel");
+
+        timeResult.GetComponent<Text>().text = "" + (GameManager.timeEnd - GameManager.timeBegin)+" s";
+  
         victoryPanel.SetActive(false);
         StartCoroutine(WaittingLose(2));
     }

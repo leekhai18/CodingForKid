@@ -12,14 +12,14 @@ public class LevelManager :Singleton<LevelManager> {
     [SerializeField]
     List<Button> listLevels;
 
-    bool isSelected;
+   // bool isSelected;
 
     public int levelSelected;
     public GameObject loadingScene;
     public Slider slide;
     // Use this for initialization
     void Start () {
-        isSelected = false;
+      //  isSelected = false;
        
 	}
 	
@@ -44,13 +44,13 @@ public class LevelManager :Singleton<LevelManager> {
         StartCoroutine(LoadYourAsyncScene());
         SelectedStaticLevel = levelSelected;
 
-        isSelected = false;
+      //  isSelected = false;
         
     }
     public void UpdateLevel(int i)
     {
         {
-            isSelected = true;
+        //    isSelected = true;
             try
             {
                 countOfLevel = GameManager.Instance.CountList();
@@ -63,7 +63,7 @@ public class LevelManager :Singleton<LevelManager> {
             StartCoroutine(LoadYourAsyncScene());
             SelectedStaticLevel = levelSelected;
 
-            isSelected = false;
+          //  isSelected = false;
         }
     }
 
@@ -94,7 +94,7 @@ public class LevelManager :Singleton<LevelManager> {
                 float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
                 slide.value = progress;
 
-                text.text = "" + progress * 100f + " %";
+                text.text = (int)(progress * 100f) + " %";
             }
             catch (Exception)
             { }

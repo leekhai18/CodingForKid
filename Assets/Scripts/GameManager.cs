@@ -212,8 +212,7 @@ public class GameManager : Singleton<GameManager>
         {
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             slide.value = progress;
-
-            text.text = "" + progress * 100f + " %";
+            text.text = (int)(progress * 100f) + " %";
             yield return null;
         }
     }
@@ -291,7 +290,7 @@ public class GameManager : Singleton<GameManager>
 
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             slide.value = progress;
-            text.text = "" + progress * 100f + " %";
+            text.text = (int)(progress * 100f) + " %";
             yield return null;
         }
     }

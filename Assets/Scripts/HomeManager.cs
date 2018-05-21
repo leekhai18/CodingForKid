@@ -7,26 +7,27 @@ public class HomeManager : MonoBehaviour {
     public GameObject loadingScene;
     public Slider slide;
     public Text text;
-    public Text test;
+    //public GameObject panelConfirm;
     // Use this for initialization
     private void Awake()
     {
+      
         slide.value = 0;
     }
     void Start () {
-       
+ 
     }
-
+   
 	// Update is called once per frame
 	void Update () {
-       
+
     }
     //public void Onchanging()
     //{
     //    test.text = "" + (int)(slide.value * 100) + "%";
     //}
     public void Ready()
-    {
+    { 
         SceneManagerment.Instance.Load("SelectLevel");
     }
     public void Replay()
@@ -58,7 +59,6 @@ public class HomeManager : MonoBehaviour {
         // You could also load the Scene by using sceneBuildIndex
 
         AsyncOperation asyncLoad = SceneManagerment.Instance.Load("SelectLevel");
-        Debug.Log("On loading scene");
         loadingScene.SetActive(true);
 
 
@@ -68,10 +68,12 @@ public class HomeManager : MonoBehaviour {
         while (!asyncLoad.isDone)
         {
 
-
+            Debug.Log(text.text);
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             slide.value = progress;
-            text.text =""+ progress * 100f + " %";
+            text.text = (int)(progress * 100f) + " %";
+
+            Debug.Log(text.text);
             yield return null;
         }
     }
@@ -92,7 +94,7 @@ public class HomeManager : MonoBehaviour {
                float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
                 slide.value = progress;
 
-                text.text = "" + progress * 100f + " %";
+            text.text = (int)(progress * 100f) + " %";
             yield return null;
         }
     }
@@ -112,8 +114,7 @@ public class HomeManager : MonoBehaviour {
         {
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             slide.value = progress;
-
-            text.text = "" + progress * 100f + " %";
+            text.text = (int)(progress * 100f) + " %";
             yield return null;
         }
     }
@@ -122,4 +123,6 @@ public class HomeManager : MonoBehaviour {
 
         StartCoroutine(LoadSkins());
     }
+   
 }
+

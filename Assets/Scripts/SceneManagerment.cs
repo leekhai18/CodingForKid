@@ -2,14 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 public class SceneManagerment : Singleton<SceneManagerment> {
     private static bool created = false;
     public static float starOfCounting=3;
+    public  AudioClip clickButton;
+    public  AudioClip bgMusic;
+    public  AudioClip gameOver;
+    public AudioClip levelCompleted;
+    public  AudioClip carRun;
+    public  AudioClip carEngine;
+    public  AudioClip gameWin;
+    public AudioClip correct;
+   
     // Use this for initialization
     void Start () {
         if (!created)
         {
+            //hello ward
+
             DontDestroyOnLoad(this.gameObject);
             created = true;
         }
@@ -30,7 +41,6 @@ public class SceneManagerment : Singleton<SceneManagerment> {
 
     public AsyncOperation Load(string sceneName, string paramKey, string paramValue)
     {
-        Debug.Log("On loading scene");
         parameters = new Dictionary<string, string>
         {
             { paramKey, paramValue }

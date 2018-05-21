@@ -16,7 +16,7 @@ public class ChooseSkin : MonoBehaviour {
 	void Start () {
         isAvailability = true;
         countdown = 0;
-        numberSkin = 0;
+        numberSkin = 1;
     }
 	
 	// Update is called once per frame
@@ -64,7 +64,8 @@ public class ChooseSkin : MonoBehaviour {
 
         // Turn back choose Level
         // Save playerPref
-        //PlayerPrefs.SetInt("SkinNumber", numberSkin);
+        PlayerPrefs.SetInt("SkinNumber", numberSkin);
+       
         SceneManager.LoadScene("GameHome");
 
     }

@@ -21,15 +21,23 @@ public class CarBehaviour : MonoBehaviour
     float counterExitColliderRoad = 0;
     bool isExitColliderRoad = false;
     // Use this for initialization
+    private void Awake()
+    {
+
+    }
     void Start()
     {
-        
+        ChangeSkins();
         
     }
-
+    public void ChangeSkins()
+    {
+        this.GetComponent<SpriteRenderer>().sprite = listOfCar.Instance.carSkins[PlayerPrefs.GetInt("SkinNumber")]; ;
+    }
     // Update is called once per frame
     void Update()
     {
+        PlayerPrefs.GetInt("SkinNumber");
         if (isReady && !isVictory)
         {
             Run();

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class QuizManager : Singleton<QuizManager>
 {
-
+    public GameObject oneMoreTurn;
     public GameObject itemController;
     public GameObject quizPannel;
     public GameObject quizBackground;
@@ -234,8 +234,34 @@ public class QuizManager : Singleton<QuizManager>
             GameManager.Instance.EndGame("Failed");
         else if (CheckEnd == false)
         {
-            GameManager.Instance.Replay();
+            StartCoroutine(Wait2scToDis(2));
+            StartCoroutine(Wait2scToReplay(5));
         }
        
     }
+    public void Replay()
+    {
+        GameManager.Instance.Replay();
+    }
+    IEnumerator Wait2scToDis(float s)
+    {
+        yield return new WaitForSeconds(s);
+        oneMoreTurn.SetActive(true);
+    }
+    IEnumerator Wait1scToDis(float s)
+    {
+        yield return new WaitForSeconds(s);
+        Replay();
+    }
+    IEnumerator Wait2scToReplay(float s)
+    {
+        
+        yield return new WaitForSeconds(s);
+        oneMoreTurn.SetActive(false);
+        StartCoroutine(Wait1scToDis(0.5f));
+        
+        
+    }
+    
+    
 }

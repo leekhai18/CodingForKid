@@ -105,9 +105,10 @@ public class HomeManager : MonoBehaviour {
         // This is particularly good for creating loading screens.
         // You could also load the Scene by using sceneBuildIndex
 
+        float fadeTime = GameObject.Find("FADE").GetComponent<Fading>().BeginFade(1);
+        
         AsyncOperation asyncLoad = SceneManagerment.Instance.Load("Skins");
         loadingScene.SetActive(true);
-
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)

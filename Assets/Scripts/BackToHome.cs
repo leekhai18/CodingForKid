@@ -11,11 +11,16 @@ public class BackToHome : MonoBehaviour {
 	}
     public void ReTurnToHome()
     {
+
+        AudioManager.Instance.Play("ButtonClick");
+
         SceneManager.LoadScene("GameHome");
         
     }
     public void ReturnToSelectLevel()
     {
+        AudioManager.Instance.Play("ButtonClick");
+
         SceneManagerment.Instance.Load("SelectLevel");
     }
     // Update is called once per frame

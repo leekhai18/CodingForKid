@@ -34,6 +34,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        AudioManager.Instance.Play("Drag");
+
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         if (transform.parent == startParent)
         {

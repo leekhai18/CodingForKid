@@ -57,11 +57,14 @@ public class GameManager : Singleton<GameManager>
         currentCommand = null;
         beginX = containerEnd.transform.position.x;
         LevelManager.countOfLevel = listLevels.ToArray().Length;
+
+        //AudioManager.Instance.Stop("Theme");
+        AudioManager.Instance.Play("BackGroundGame");
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {        
 
         if (timeBegin != 0 && timeEnd == 0)
         {
@@ -194,6 +197,8 @@ public class GameManager : Singleton<GameManager>
     }
   public void Replay()
     {
+        AudioManager.Instance.Play("ButtonClick");
+
         StartCoroutine(Loadreplay());
     }
     IEnumerator Loadreplay()
@@ -250,12 +255,15 @@ public class GameManager : Singleton<GameManager>
     }
     public void ReturnToLevelSelect()
     {
+        AudioManager.Instance.Play("ButtonClick");
 
         SceneManagerment.starOfCounting = 3;
         SceneManagerment.Instance.Load("SelectLevel");
     }
     public void ReturnToHome()
     {
+        AudioManager.Instance.Stop("BackGroundGame");
+
         SceneManagerment.starOfCounting = 3;
         SceneManagerment.Instance.Load("GameHome");
 

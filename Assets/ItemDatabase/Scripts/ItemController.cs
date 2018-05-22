@@ -88,7 +88,9 @@ public class ItemController : Singleton<ItemController>
     //hide information panel
     public void HideInformationPanel()
     {
-       gameController.GetComponent< FadeController>().FadeOut();
+        AudioManager.Instance.Play("ButtonClick");
+
+        gameController.GetComponent< FadeController>().FadeOut();
         StartCoroutine(DestroyInformationPanelAfter(gameController.GetComponent<FadeController>().Time));
         signalCheck = true;
     }

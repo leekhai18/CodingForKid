@@ -32,7 +32,7 @@ public class CarBehaviour : MonoBehaviour
     }
     public void ChangeSkins()
     {
-        this.GetComponent<SpriteRenderer>().sprite = listOfCar.Instance.carSkins[PlayerPrefs.GetInt("SkinNumber")]; ;
+        this.GetComponent<SpriteRenderer>().sprite = listOfCar.Instance.carSkins[PlayerPrefs.GetInt("SkinNumber", 0)]; ;
     }
     // Update is called once per frame
     void Update()
@@ -48,9 +48,7 @@ public class CarBehaviour : MonoBehaviour
             counterExitColliderRoad += Time.deltaTime;
 
             if (counterExitColliderRoad > 0.05f)
-            {
-
-             
+            {           
 
                 Accident();
                 isExitColliderRoad = false;
@@ -91,9 +89,14 @@ public class CarBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Home"))
         {
+            AudioManager.Instance.Stop("Run");
+
             GameManager.Instance.NextCommand();
             isVictory = true;
             GameManager.timeEnd = Time.time;
+
+            AudioManager.Instance.Play("Victory");
+
             Debug.Log("VICTORY!!!!!!!!!!!!!!!!!!!!!!!!!");
             GameManager.Instance.EndGame("Victory");
         }
@@ -106,8 +109,10 @@ public class CarBehaviour : MonoBehaviour
 
         if (collision.CompareTag("Quiz"))
         {
+            AudioManager.Instance.Stop("Run");
+
             GameManager.timeEnd= Time.time;
-            Debug.Log("befor"+SceneManagerment.starOfCounting);
+            Debug.Log("before" + SceneManagerment.starOfCounting);
             if (SceneManagerment.starOfCounting > 1)
             {
                 SceneManagerment.starOfCounting--;
@@ -120,8 +125,7 @@ public class CarBehaviour : MonoBehaviour
             else
             {
                 Accident();
-            }
-            
+            }            
         }
     }
 
@@ -167,11 +171,11 @@ public class CarBehaviour : MonoBehaviour
         isReady = false;
         Instantiate(effectBoom, transform.position, Quaternion.identity);
         GameManager.Instance.EndGame("Failed");
-
-
     }
     void Accident()
     {
+        AudioManager.Instance.Stop("Run");
+        AudioManager.Instance.Play("Die");
 
         GameManager.timeEnd = Time.time;
 
@@ -183,6 +187,8 @@ public class CarBehaviour : MonoBehaviour
 
     public  void Run()
     {
+        AudioManager.Instance.Play("Run");
+
         transform.position = new Vector3(transform.position.x + speedX * directionOnHorizontal * Time.deltaTime, transform.position.y + speedY * directionOnVertical * Time.deltaTime, transform.position.z);
     }
 }

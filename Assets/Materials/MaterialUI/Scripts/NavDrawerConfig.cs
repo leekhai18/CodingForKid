@@ -144,6 +144,8 @@ namespace MaterialUI
 
 		public void OnEndDrag(PointerEventData data)
 		{
+            AudioManager.Instance.Play("Drag");
+
 			if (Mathf.Abs(data.delta.x) >= 0.5f)
 			{
 				if (data.delta.x > 0.5f)

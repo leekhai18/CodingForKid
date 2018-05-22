@@ -35,6 +35,8 @@ public class ChooseSkin : MonoBehaviour {
 
     public void NextCar()
     {
+        AudioManager.Instance.Play("ButtonClick");
+
         if (isAvailability)
         {
             if (listCar.transform.position.x > -38)
@@ -48,6 +50,8 @@ public class ChooseSkin : MonoBehaviour {
 
     public void PreviousCar()
     {
+        AudioManager.Instance.Play("ButtonClick");
+
         if (isAvailability)
         {
             if (listCar.transform.position.x < 29)
@@ -61,7 +65,7 @@ public class ChooseSkin : MonoBehaviour {
 
     public void ChooseCar()
     {
-
+        AudioManager.Instance.Play("ButtonClick");
         // Turn back choose Level
         // Save playerPref
         PlayerPrefs.SetInt("SkinNumber", numberSkin);

@@ -31,6 +31,14 @@ public class LevelManager :Singleton<LevelManager> {
 
     public void SelectedLevel(int i)
     {
+
+        AudioManager.Instance.Play("ButtonClick");
+        Debug.Log("stop them audio  + select level "+i);
+
+        AudioManager.Instance.Stop("Theme");
+
+        
+
         try
         {
           
@@ -50,7 +58,7 @@ public class LevelManager :Singleton<LevelManager> {
     public void UpdateLevel(int i)
     {
         {
-        //    isSelected = true;
+            //    isSelected = true;
             try
             {
                 countOfLevel = GameManager.Instance.CountList();
@@ -69,7 +77,8 @@ public class LevelManager :Singleton<LevelManager> {
 
     IEnumerator LoadYourAsyncScene()
     {
-
+        
+        
         // The Application loads the Scene in the background as the current Scene runs.
         // This is particularly good for creating loading screens.
         // You could also load the Scene by using sceneBuildIndex
@@ -98,6 +107,8 @@ public class LevelManager :Singleton<LevelManager> {
             }
             catch (Exception)
             { }
+            
+
             yield return null;
         }
     }

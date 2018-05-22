@@ -55,7 +55,7 @@ public class SceneManagerment : Singleton<SceneManagerment> {
 
     public string GetParam(string paramKey)
     {
-        if (parameters == null) return "";
+        if (parameters == null) return "0";
         return parameters[paramKey];
     }
 

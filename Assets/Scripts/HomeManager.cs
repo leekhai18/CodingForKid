@@ -32,6 +32,8 @@ public class HomeManager : MonoBehaviour {
     }
     public void Replay()
     {
+        AudioManager.Instance.Play("ButtonClick");
+
         SceneManagerment.starOfCounting = 3;
         Debug.Log("set starOfCounting =3 tai homescene");
         StartCoroutine(Loadreplay());
@@ -43,6 +45,8 @@ public class HomeManager : MonoBehaviour {
     }
     public void BackToHome()
     {
+        AudioManager.Instance.Play("ButtonClick");
+
         SceneManagerment.starOfCounting = 3;
         SceneManager.LoadScene("GameHome");
     }

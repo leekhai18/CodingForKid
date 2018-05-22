@@ -47,7 +47,6 @@ public class GameManager : Singleton<GameManager>
     // Use this for initialization
     void Start()
     {
-        countTime = 10;
         clock.GetComponent<Text>().text = "" + countTime + " Seconds";
         timeEnd = 0;
         timeBegin = 0;

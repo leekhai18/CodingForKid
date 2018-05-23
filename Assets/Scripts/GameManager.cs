@@ -31,6 +31,8 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     List<GameObject> listLevels;
+
+
 #pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     private void Awake()
 #pragma warning restore CS0114 // Member hides inherited member; missing override keyword
@@ -274,6 +276,8 @@ public class GameManager : Singleton<GameManager>
     public void LoadSceneNextLevel()
     {
         LevelManager.SelectedStaticLevel++;
+        SceneManagerment.starOfCounting = 3;
+
         StartCoroutine(LoadYourAsyncScene());
     }
     IEnumerator LoadYourAsyncScene()

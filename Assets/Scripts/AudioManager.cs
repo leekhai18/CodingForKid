@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 
 public class AudioManager : Singleton<AudioManager> {
+    private static bool createdAudioM = false;
 
     [SerializeField]
     AudioSource[] audioSources;
@@ -11,18 +12,22 @@ public class AudioManager : Singleton<AudioManager> {
     AudioSound[] sounds;
 
 
-
     // Use this for initialization
-#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     private void Awake ()
     {
-#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
-        DontDestroyOnLoad(gameObject);
+        if (!createdAudioM)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            createdAudioM = true;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
 	}
 
     private void Start()
     {
-        Play("Theme");
     }
 
     public void Play(string name)
@@ -44,8 +49,6 @@ public class AudioManager : Singleton<AudioManager> {
 
     public void Stop(string name)
     {
-        Debug.Log("Stop music"+name);
-
         AudioSound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
         {
@@ -53,18 +56,48 @@ public class AudioManager : Singleton<AudioManager> {
             return;
         }
 
-        for (int i = 0; i < audioSources.Length; i++)
+        if (s != null)
         {
-            if (audioSources[i].isPlaying)
+            for (int i = 0; i < audioSources.Length; i++)
             {
-                if (audioSources[i].clip.name == s.clip.name)
+                if (audioSources[i].isPlaying)
                 {
-                    audioSources[i].Pause();
-                    audioSources[i].Stop();
+                    if (audioSources[i].clip.name == s.clip.name)
+                    {
+                        audioSources[i].Pause();
+                        audioSources[i].Stop();
+                    }
                 }
             }
         }
     }
+
+    public bool IsPlaying(string name)
+    {
+        AudioSound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found.");
+            return false;
+        }
+
+        if (s != null)
+        {
+            for (int i = 0; i < audioSources.Length; i++)
+            {
+                if (audioSources[i].isPlaying)
+                {
+                    if (audioSources[i].clip.name == s.clip.name)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     AudioSource GetFreeAudioSource()
     {
         for (int i = 0; i < audioSources.Length; i++)
@@ -76,5 +109,10 @@ public class AudioManager : Singleton<AudioManager> {
         }
 
         return audioSources[0];
+    }
+
+    public AudioSource[] GetListAudioSources()
+    {
+        return audioSources;
     }
 }

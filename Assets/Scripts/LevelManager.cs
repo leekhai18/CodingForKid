@@ -7,14 +7,12 @@ using System;
 
 public class LevelManager :Singleton<LevelManager> {
     public static int countOfLevel=0;
-     public static int SelectedStaticLevel;
+    public static int SelectedStaticLevel;
     public Text text;
-    [SerializeField]
-    List<Button> listLevels;
 
-   // bool isSelected;
+    // bool isSelected;
 
-    public int levelSelected;
+    int levelSelected;
     public GameObject loadingScene;
     public Slider slide;
     // Use this for initialization
@@ -33,28 +31,22 @@ public class LevelManager :Singleton<LevelManager> {
     {
 
         AudioManager.Instance.Play("ButtonClick");
-        Debug.Log("stop them audio  + select level "+i);
 
-        AudioManager.Instance.Stop("Theme");
-
-        
+        AudioManager.Instance.Stop("Theme");     
 
         try
-        {
-          
-            // countOfLevel= GameManager.Instance.CountList();
+        {         
             levelSelected = i;
         }
         catch (Exception)
         {
             levelSelected = 0;
           }
-        StartCoroutine(LoadYourAsyncScene());
-        SelectedStaticLevel = levelSelected;
 
-      //  isSelected = false;
-        
+        StartCoroutine(LoadYourAsyncScene());
+        SelectedStaticLevel = levelSelected; 
     }
+
     public void UpdateLevel(int i)
     {
         {
@@ -68,6 +60,7 @@ public class LevelManager :Singleton<LevelManager> {
             {
                 levelSelected = 0;
             }
+
             StartCoroutine(LoadYourAsyncScene());
             SelectedStaticLevel = levelSelected;
 
@@ -116,10 +109,4 @@ public class LevelManager :Singleton<LevelManager> {
     {
         return SelectedStaticLevel;
     }
-    public int CountListOfMap()
-    {
-
-        return GameManager.Instance.CountList();
-    }
-
 }

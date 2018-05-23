@@ -7,7 +7,7 @@ public class HomeManager : MonoBehaviour {
     public GameObject loadingScene;
     public Slider slide;
     public Text text;
-    //public GameObject panelConfirm;
+
     // Use this for initialization
     private void Awake()
     {
@@ -15,17 +15,15 @@ public class HomeManager : MonoBehaviour {
         slide.value = 0;
     }
     void Start () {
- 
+        if (!AudioManager.Instance.IsPlaying("Theme"))
+            AudioManager.Instance.Play("Theme");
     }
-   
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
     }
-    //public void Onchanging()
-    //{
-    //    test.text = "" + (int)(slide.value * 100) + "%";
-    //}
+
     public void Ready()
     { 
         SceneManagerment.Instance.Load("SelectLevel");
@@ -71,8 +69,6 @@ public class HomeManager : MonoBehaviour {
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
-
-            Debug.Log(text.text);
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
             slide.value = progress;
             text.text = (int)(progress * 100f) + " %";

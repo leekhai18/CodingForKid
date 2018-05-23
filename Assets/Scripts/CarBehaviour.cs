@@ -97,7 +97,6 @@ public class CarBehaviour : MonoBehaviour
 
             AudioManager.Instance.Play("Victory");
 
-            Debug.Log("VICTORY!!!!!!!!!!!!!!!!!!!!!!!!!");
             GameManager.Instance.EndGame("Victory");
         }
 

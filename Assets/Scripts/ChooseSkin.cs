@@ -69,13 +69,11 @@ public class ChooseSkin : MonoBehaviour {
 
     public void ChooseCar()
     {
-        //AudioManager.Instance.Play("ButtonClick");
+        AudioManager.Instance.Play("ButtonClick");
 
-        //PlayerPrefs.SetInt("SkinNumber", numberSkin);
+        PlayerPrefs.SetInt("SkinNumber", numberSkin);
 
-        //SceneManager.LoadScene("GameHome");
-
-        Debug.Log(listCar.transform.localPosition.x);
+        SceneManager.LoadScene("GameHome");
     }
   
   

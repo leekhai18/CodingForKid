@@ -8,12 +8,24 @@ public class GroupPanelForGuide : MonoBehaviour {
     // Use this for initialization
     Animator animator;
 
-	void Start () {
+    RectTransform rectTran;
+
+    void Start () {
+        rectTran = GetComponent<RectTransform>();
+
         GameObject UIOverLayout = GameObject.FindGameObjectWithTag("UIOverlayout");
 
         if (UIOverLayout)
         {
             this.transform.SetParent(UIOverLayout.transform);
+
+            rectTran.localScale = new Vector3(1, 1, 1);
+
+            rectTran.anchorMin = Vector2.zero;
+            rectTran.anchorMax = Vector2.one;
+            rectTran.pivot = new Vector2(0.5f, 0.5f);
+            rectTran.sizeDelta = Vector2.zero;
+            rectTran.localPosition = Vector2.zero;
         }
 
         animator = this.GetComponent<Animator>();

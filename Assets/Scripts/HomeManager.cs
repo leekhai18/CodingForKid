@@ -33,7 +33,7 @@ public class HomeManager : MonoBehaviour {
         AudioManager.Instance.Play("ButtonClick");
 
         SceneManagerment.starOfCounting = 3;
-        Debug.Log("set starOfCounting =3 tai homescene");
+
         StartCoroutine(Loadreplay());
     }
     public void Quit()

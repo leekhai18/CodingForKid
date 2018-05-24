@@ -56,10 +56,11 @@ public class GameManager : Singleton<GameManager>
         listCommands = new List<Command>();
         carBehaviour = car.GetComponent<CarBehaviour>();
         currentCommand = null;
-        beginX = containerEnd.transform.position.x;
+        beginX = containerEnd.transform.localPosition.x;
         LevelManager.countOfLevel = listLevels.ToArray().Length;
 
-        //AudioManager.Instance.Stop("Theme");
+        AudioManager.Instance.Stop("Theme");
+
         AudioManager.Instance.Play("BackGroundGame");
     }
 
@@ -127,9 +128,9 @@ public class GameManager : Singleton<GameManager>
             currentCommand.Controller(carBehaviour);
             EffectChoosing();
 
-            if (currentCommand.transform.parent.position.x > 676)
+            if (currentCommand.transform.parent.localPosition.x > 500)
             {
-                Backward(90, 0.8f);
+                Backward(120, 0.8f);
             }
         }
         else
@@ -184,17 +185,17 @@ public class GameManager : Singleton<GameManager>
 
     public void Backward(float distance, float duration)
     {
-        containerEnd.transform.DOMoveX(containerEnd.transform.position.x - distance, duration);
+        containerEnd.transform.DOLocalMoveX(containerEnd.transform.localPosition.x - distance, duration);
     }
 
     public void Forward(float distance, float duration)
     {
-        containerEnd.transform.DOMoveX(containerEnd.transform.position.x + distance, duration);
+        containerEnd.transform.DOLocalMoveX(containerEnd.transform.localPosition.x + distance, duration);
     }
 
     public void TurnBackBeginPositionX()
     {
-        containerEnd.transform.DOMoveX(beginX, 0.15f);
+        containerEnd.transform.DOLocalMoveX(beginX, 0.15f);
     }
   public void Replay()
     {
@@ -266,6 +267,7 @@ public class GameManager : Singleton<GameManager>
         AudioManager.Instance.Stop("BackGroundGame");
 
         SceneManagerment.starOfCounting = 3;
+
         SceneManagerment.Instance.Load("GameHome");
 
     }

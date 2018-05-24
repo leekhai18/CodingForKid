@@ -18,8 +18,12 @@ public class CarBehaviour : MonoBehaviour
 
     [SerializeField] GameObject effectBoom;
 
+    [SerializeField]
+    List<Sprite> listSkin;
+
     float counterExitColliderRoad = 0;
     bool isExitColliderRoad = false;
+
     // Use this for initialization
     private void Awake()
     {
@@ -27,13 +31,9 @@ public class CarBehaviour : MonoBehaviour
     }
     void Start()
     {
-        ChangeSkins();
-        
+        GetComponent<SpriteRenderer>().sprite = listSkin[PlayerPrefs.GetInt("SkinNumber", 0)];
     }
-    public void ChangeSkins()
-    {
-        this.GetComponent<SpriteRenderer>().sprite = listOfCar.Instance.carSkins[PlayerPrefs.GetInt("SkinNumber", 0)]; ;
-    }
+
     // Update is called once per frame
     void Update()
     {
@@ -111,12 +111,11 @@ public class CarBehaviour : MonoBehaviour
             AudioManager.Instance.Stop("Run");
 
             GameManager.timeEnd= Time.time;
-            Debug.Log("before" + SceneManagerment.starOfCounting);
+
             if (SceneManagerment.starOfCounting > 1)
             {
                 SceneManagerment.starOfCounting--;
 
-                Debug.Log("after" + SceneManagerment.starOfCounting);
                 Stop();
                 QuizManager.Instance.InitQuiz(collision.GetComponent<Quiz>());
 

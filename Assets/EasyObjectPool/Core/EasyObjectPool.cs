@@ -53,6 +53,8 @@ namespace MarchingBytes
         private PoolObject NewObjectInstance(Transform transformParent)
         {
             GameObject go = (GameObject)GameObject.Instantiate(poolObjectPrefab, transformParent);
+            float temp = 1 * 0.2645f;
+            go.GetComponent<RectTransform>().localScale = new Vector3(temp, temp, temp);
             PoolObject po = go.GetComponent<PoolObject>();
             if (po == null)
             {

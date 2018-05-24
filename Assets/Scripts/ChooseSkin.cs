@@ -16,7 +16,7 @@ public class ChooseSkin : MonoBehaviour {
 	void Start () {
         isAvailability = true;
         countdown = 0;
-        numberSkin = 1;
+        numberSkin = 0;
     }
 	
 	// Update is called once per frame
@@ -39,12 +39,14 @@ public class ChooseSkin : MonoBehaviour {
 
         if (isAvailability)
         {
-            if (listCar.transform.position.x > -38)
-                listCar.transform.DOMoveX(listCar.transform.position.x - 10.4f, 1);
+            if (listCar.transform.position.x > -28 && listCar.transform.position.x < 24)
+            {
+                listCar.transform.DOMoveX(listCar.transform.position.x + 7.37f, 1);
 
-            isAvailability = false;
+                isAvailability = false;
 
-            numberSkin++;
+                numberSkin++;
+            }
         }
     }
 
@@ -54,26 +56,26 @@ public class ChooseSkin : MonoBehaviour {
 
         if (isAvailability)
         {
-            if (listCar.transform.position.x < 29)
-                listCar.transform.DOMoveX(listCar.transform.position.x + 10.4f, 1);
+            if (listCar.transform.position.x < 25 && listCar.transform.position.x > -27)
+            {
+                listCar.transform.DOMoveX(listCar.transform.position.x - 7.37f, 1);
 
-            isAvailability = false;
+                isAvailability = false;
 
-            numberSkin--;
+                numberSkin--;
+            }
         }
     }
 
     public void ChooseCar()
     {
         AudioManager.Instance.Play("ButtonClick");
-        // Turn back choose Level
-        // Save playerPref
-        PlayerPrefs.SetInt("SkinNumber", numberSkin);
-       
-        SceneManager.LoadScene("GameHome");
 
+        PlayerPrefs.SetInt("SkinNumber", numberSkin);
+
+        SceneManager.LoadScene("GameHome");
     }
   
   
-    }
+}
 

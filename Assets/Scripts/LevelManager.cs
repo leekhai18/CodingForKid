@@ -29,10 +29,7 @@ public class LevelManager :Singleton<LevelManager> {
 
     public void SelectedLevel(int i)
     {
-
         AudioManager.Instance.Play("ButtonClick");
-
-        AudioManager.Instance.Stop("Theme");     
 
         try
         {         

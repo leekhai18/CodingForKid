@@ -18,28 +18,27 @@ public class BackForward : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     // Use this for initialization
     void Start()
     {
-        velocity = 1000;
+        velocity = 2000;
         containerEnd = GameManager.Instance.containerEnd;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // ContainerEnd will move from 358 to -1020
         if (isDowning)
         {
             if (isBackward)
             {
-                if (containerEnd.transform.position.x > -1020)
+                if (containerEnd.transform.localPosition.x > -1202)
                 {
                     GameManager.Instance.Backward(velocity * Time.deltaTime, 0.2f);
                 }
             }
             else
             {
-                if (containerEnd.transform.position.x < 358)
+                if (containerEnd.transform.localPosition.x < -6)
                 {
-                    GameManager.Instance.Forward(velocity * Time.deltaTime, 0.2f);
+                   GameManager.Instance.Forward(velocity * Time.deltaTime, 0.2f);
                 }
             }
         }

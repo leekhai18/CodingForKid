@@ -39,9 +39,9 @@ public class ChooseSkin : MonoBehaviour {
 
         if (isAvailability)
         {
-            if (listCar.transform.position.x > -28 && listCar.transform.position.x < 24)
+            if (listCar.transform.localPosition.x > -2500 && listCar.transform.localPosition.x < 3000)
             {
-                listCar.transform.DOMoveX(listCar.transform.position.x + 7.37f, 1);
+                listCar.transform.DOLocalMoveX(listCar.transform.localPosition.x + 800, 1);
 
                 isAvailability = false;
 
@@ -56,9 +56,9 @@ public class ChooseSkin : MonoBehaviour {
 
         if (isAvailability)
         {
-            if (listCar.transform.position.x < 25 && listCar.transform.position.x > -27)
+            if (listCar.transform.localPosition.x < 3200 && listCar.transform.localPosition.x > -2400)
             {
-                listCar.transform.DOMoveX(listCar.transform.position.x - 7.37f, 1);
+                listCar.transform.DOLocalMoveX(listCar.transform.localPosition.x - 800, 1);
 
                 isAvailability = false;
 
@@ -69,11 +69,13 @@ public class ChooseSkin : MonoBehaviour {
 
     public void ChooseCar()
     {
-        AudioManager.Instance.Play("ButtonClick");
+        //AudioManager.Instance.Play("ButtonClick");
 
-        PlayerPrefs.SetInt("SkinNumber", numberSkin);
+        //PlayerPrefs.SetInt("SkinNumber", numberSkin);
 
-        SceneManager.LoadScene("GameHome");
+        //SceneManager.LoadScene("GameHome");
+
+        Debug.Log(listCar.transform.localPosition.x);
     }
   
   

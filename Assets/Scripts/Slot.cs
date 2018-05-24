@@ -33,8 +33,9 @@ public class Slot : MonoBehaviour, IDropHandler
 
                 if (DragHandler.itemBeginDragged.GetCurrentState() == EState.begin)
                 {
-                    EasyObjectPool.Instance.GetObjectFromPool(begin.poolName, begin.transform.position, Quaternion.identity)
-                        .transform.SetParent(begin.transform);
+                    GameObject obj = EasyObjectPool.Instance.GetObjectFromPool(begin.poolName, begin.transform.position, Quaternion.identity);
+                    obj.transform.SetParent(begin.transform);
+                    obj.GetComponent<RectTransform>().localScale = Vector3.one;
                 }
 
                 DragHandler.itemBeginDragged.transform.SetParent(transform);

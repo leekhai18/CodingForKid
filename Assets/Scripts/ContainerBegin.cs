@@ -14,6 +14,7 @@ public class ContainerBegin : MonoBehaviour
         {
             GameObject obj = EasyObjectPool.Instance.GetObjectFromPool(EasyObjectPool.Instance.poolInfo[i].poolName, slots[i].transform.position, Quaternion.identity);
             obj.transform.SetParent(slots[i].transform);
+            obj.GetComponent<RectTransform>().localScale = Vector3.one;
         }
     }
 

@@ -278,6 +278,8 @@ public class GameManager : Singleton<GameManager>
     public void LoadSceneNextLevel()
     {
         LevelManager.SelectedStaticLevel++;
+        PlayerPrefs.SetInt("CurrentLevel", LevelManager.SelectedStaticLevel + 1);
+
         SceneManagerment.starOfCounting = 3;
 
         StartCoroutine(LoadYourAsyncScene());
